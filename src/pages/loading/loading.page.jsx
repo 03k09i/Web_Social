@@ -1,3 +1,5 @@
+import React from "react";
+
 function LoadingPage() {
   return (
     <div className="page-loader">

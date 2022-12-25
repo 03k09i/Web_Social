@@ -59,7 +59,7 @@ export default function ItemCommentReply(props) {
       <a className="user-avatar small no-outline" href="profile-timeline.html">
         <div className="user-avatar-content">
           <img
-            src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+            src={"/img/landing/mylove2.jpg"}
             className="image-avatar-40"
             alt="error"
           />
@@ -79,7 +79,7 @@ export default function ItemCommentReply(props) {
                 <div className="reaction-item">
                   <img
                     className="reaction-image reaction-item-dropdown-trigger"
-                    src={process.env.PUBLIC_URL + "/img/reaction/happy.png"}
+                    src={"/img/reaction/happy.png"}
                     alt="reaction-happy"
                   />
                 </div>
@@ -106,7 +106,7 @@ export default function ItemCommentReply(props) {
               >
                 <img
                   className="post-option-icon icon-thumbs-up mr-10"
-                  src={process.env.PUBLIC_URL + "/img/reaction/love.png"}
+                  src={"/img/reaction/love.png"}
                   alt="reaction-love"
                 />{" "}
                 Love

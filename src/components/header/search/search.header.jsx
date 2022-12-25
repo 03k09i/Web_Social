@@ -94,7 +94,7 @@ export default function SearchHeader() {
                       <div className="user-avatar-content">
                         <img
                           src={
-                            process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"
+                            "/img/landing/mylove2.jpg"
                           }
                           className="image-avatar-40"
                           alt="error"

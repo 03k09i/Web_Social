@@ -5,10 +5,7 @@ export default function FriendItem(props) {
   return (
     <div className="user-preview small">
       <figure className="user-preview-cover liquid">
-        <img
-          src={process.env.PUBLIC_URL + "/img/cover/04.jpg"}
-          alt="cover-04"
-        />
+        <img src={"/img/cover/04.jpg"} alt="cover-04" />
       </figure>
 
       <div className="user-preview-info">

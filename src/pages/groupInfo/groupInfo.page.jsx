@@ -22,7 +22,7 @@ export default function GroupInfoPage() {
               href="group-timeline.html"
             >
               <img
-                src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+                src={"/img/landing/mylove2.jpg"}
                 className="image-avatar-148 avatar-border-white"
                 alt="error"
               />

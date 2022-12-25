@@ -14,10 +14,7 @@ export default function StartChatMess() {
         className="user-short-description-avatar user-avatar medium"
         href="profile-timeline.html"
       >
-        <img
-          src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
-          className="image-avatar-120"
-        />
+        <img src={"/img/landing/mylove2.jpg"} className="image-avatar-120" />
       </a>
       <p
         style={{

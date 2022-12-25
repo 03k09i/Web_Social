@@ -73,10 +73,7 @@ export default function ProfileHeader() {
   return (
     <div className="profile-header">
       <figure className="profile-header-cover liquid">
-        <img
-          src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
-          alt="cover-01"
-        />
+        <img src={"/img/landing/mylove2.jpg"} alt="cover-01" />
       </figure>
 
       <div className="profile-header-info">

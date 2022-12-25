@@ -133,7 +133,7 @@ export default function ItemNewsfeed(props) {
             >
               <img
                 className="post-option-icon icon-thumbs-up"
-                src={process.env.PUBLIC_URL + "/img/reaction/love.png"}
+                src={"/img/reaction/love.png"}
                 alt="reaction-love"
               />
               <p className="post-option-text">Love</p>

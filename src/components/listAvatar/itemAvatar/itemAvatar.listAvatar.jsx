@@ -5,7 +5,7 @@ export default function ItemAvatar() {
     <div className="user-avatar smaller no-stats">
       <div className="user-avatar-content">
         <img
-          src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+          src={"/img/landing/mylove2.jpg"}
           className="image-avatar-32"
           alt="error"
           style={{ padding: 2, backgroundColor: "#fff" }}

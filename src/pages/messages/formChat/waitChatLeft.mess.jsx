@@ -6,10 +6,7 @@ export default function WaitChatLeftMess() {
       <div className="chat-widget-speaker-avatar">
         <div className="user-avatar tiny no-border">
           <div className="user-avatar-content">
-            <img
-              src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
-              className="image-avatar-30"
-            />
+            <img src={"/img/landing/mylove2.jpg"} className="image-avatar-30" />
           </div>
         </div>
       </div>

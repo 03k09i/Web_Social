@@ -51,7 +51,7 @@ export default function Login() {
     <div className="form-box login-register-form-element animation-form-auth">
       <img
         className="form-box-decoration overflowing"
-        src={process.env.PUBLIC_URL + "/img/landing/plane.png"}
+        src={"/img/landing/plane.png"}
         alt="rocket"
         style={{ width: 100, height: 100 }}
       />

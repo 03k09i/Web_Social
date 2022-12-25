@@ -11,7 +11,7 @@ export default function ChatRightForm(props) {
       {onSeen ? (
         <div className="chat-widget-speaker-avatar">
           <img
-            src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+            src={"/img/landing/mylove2.jpg"}
             className="image-avatar-14"
             alt="ERROR"
           />

@@ -20,7 +20,7 @@ export default function SidebarMobieHeader() {
           >
             <div className="user-avatar-content">
               <img
-                src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+                src={"/img/landing/mylove2.jpg"}
                 className="image-avatar-40"
               />
             </div>

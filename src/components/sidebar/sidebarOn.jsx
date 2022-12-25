@@ -8,20 +8,14 @@ export default function SidebarOnHeader() {
       data-simplebar
     >
       <figure className="navigation-widget-cover liquid">
-        <img
-          src={process.env.PUBLIC_URL + "/img/cover/01.jpg"}
-          alt="cover-01"
-        />
+        <img src={"/img/cover/01.jpg"} alt="cover-01" />
       </figure>
       <div className="user-short-description">
         <a
           className="user-short-description-avatar user-avatar medium"
           href="profile-timeline.html"
         >
-          <img
-            src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
-            className="image-avatar-120"
-          />
+          <img src={"/img/landing/mylove2.jpg"} className="image-avatar-120" />
         </a>
         <p className="user-short-description-title">
           <a href="profile-timeline.html">Kiệt Phan</a>

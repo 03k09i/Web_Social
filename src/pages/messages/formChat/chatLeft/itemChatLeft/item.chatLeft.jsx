@@ -18,7 +18,7 @@ export default function ItemChatLeft(props) {
           {/* item-message-delete */}
           {/* <img
             className="reaction-option-image-messages"
-            src={process.env.PUBLIC_URL + "/img/reaction/like.png"}
+            src={"/img/reaction/like.png"}
             alt="reaction-like"
             style={{ right: 12 }}
           /> */}

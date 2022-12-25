@@ -32,9 +32,7 @@ export default function UpLoadImage(props) {
       <Fab size="small" component="span" aria-label="add" variant="extended">
         <div
           style={{
-            background: `url(${
-              process.env.PUBLIC_URL + "/img/landing/camera.png"
-            }) center center / contain no-repeat`,
+            background: `url(${"/img/landing/camera.png"}) center center / contain no-repeat`,
             color: "white",
             zIndex: 1,
             width: 20,

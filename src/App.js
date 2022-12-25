@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import { io } from "socket.io-client";
@@ -16,7 +17,6 @@ import {
 import { getListChannelAction } from "./store/actions/channel.actions";
 import { setSocket } from "./store/reducers/socket.reducer";
 import { setCheckLogin } from "./store/reducers/user.reducer";
-import { getListPostAction } from "./store/actions/post.actions";
 import { getNotifyAction } from "./store/actions/notify.actions";
 import Swal from "sweetalert2";
 

@@ -16,9 +16,7 @@ export default function ItemPhoto(props) {
     >
       <figure className="photo-preview-image liquid">
         <img
-          src={
-            itemImg?.link || process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"
-          }
+          src={itemImg?.link || "/img/landing/mylove2.jpg"}
           alt="photo-preview-01"
         />
       </figure>

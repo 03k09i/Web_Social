@@ -3,6 +3,7 @@ import ItemChatLeft from "./itemChatLeft/item.chatLeft";
 
 export default function ChatLeftForm(props) {
   const { itemMess, onSeen, onReply } = props;
+  console.log(itemMess);
   return (
     <div
       className="chat-widget-speaker left"
@@ -13,7 +14,7 @@ export default function ChatLeftForm(props) {
           <div className="user-avatar tiny no-border">
             <div className="user-avatar-content">
               <img
-                src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+                src={"/img/landing/mylove2.jpg"}
                 className="image-avatar-30"
                 alt="ERROR"
               />

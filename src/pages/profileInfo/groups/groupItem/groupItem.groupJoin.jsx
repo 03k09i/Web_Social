@@ -5,10 +5,7 @@ export default function GroupsItem() {
   return (
     <div className="user-preview">
       <figure className="user-preview-cover liquid">
-        <img
-          src={process.env.PUBLIC_URL + "/img/cover/29.jpg"}
-          alt="cover-29"
-        />
+        <img src={"/img/cover/29.jpg"} alt="cover-29" />
       </figure>
 
       <div className="user-preview-info">
@@ -24,7 +21,7 @@ export default function GroupsItem() {
             href="group-timeline.html"
           >
             <img
-              src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+              src={"/img/landing/mylove2.jpg"}
               className="image-avatar-120 avatar-border-white"
               alt="error"
             />

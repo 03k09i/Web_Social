@@ -1,3 +1,4 @@
+import React from "react";
 import { RefObject, useEffect, useState } from "react";
 
 export default function useOnScreen(ref) {

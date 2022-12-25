@@ -17,7 +17,7 @@ export default function ReactionTotal() {
     >
       <img
         className="reaction-image reaction-item-dropdown-trigger"
-        src={process.env.PUBLIC_URL + "/img/reaction/love.png"}
+        src={"/img/reaction/love.png"}
         alt="reaction-love"
       />
       <Popper
@@ -34,7 +34,7 @@ export default function ReactionTotal() {
           <p className="simple-dropdown-text">
             <img
               className="reaction"
-              src={process.env.PUBLIC_URL + "/img/reaction/love.png"}
+              src={"/img/reaction/love.png"}
               alt="reaction-love"
             />{" "}
             <span className="bold">Love</span>

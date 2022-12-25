@@ -68,9 +68,7 @@ export default function PopupNewsfeed() {
                       <div className="user-avatar-content">
                         <div
                           className="hexagon-image-30-32"
-                          data-src={
-                            process.env.PUBLIC_URL + "/img/avatar/01.jpg"
-                          }
+                          data-src={"/img/avatar/01.jpg"}
                         />
                       </div>
                     </div>
@@ -151,10 +149,7 @@ export default function PopupNewsfeed() {
 
         <div className="popup-picture-image-wrap">
           <figure className="popup-picture-image">
-            <img
-              src={process.env.PUBLIC_URL + "/img/cover/04.jpg"}
-              alt="cover-04"
-            />
+            <img src={"/img/cover/04.jpg"} alt="cover-04" />
           </figure>
         </div>
       </div>

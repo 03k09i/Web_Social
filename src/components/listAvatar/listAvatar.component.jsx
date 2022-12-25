@@ -9,7 +9,7 @@ export default function ListAvatar() {
       <a className="user-avatar smaller no-stats" href="group-members.html">
         <div className="user-avatar-content">
           <img
-            src={process.env.PUBLIC_URL + "/img/landing/mylove2.jpg"}
+            src={"/img/landing/mylove2.jpg"}
             className="image-avatar-32"
             alt="error"
             style={{ padding: 2, backgroundColor: "#fff" }}
