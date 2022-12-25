@@ -1,8 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
-const dotenv = require("dotenv");
-dotenv.config();
+const Dotenv = require("dotenv-webpack");
 module.exports = {
   entry: ["@babel/polyfill", "./src/index.js"], // Dẫn tới file index.js ta đã tạo
   output: {
@@ -35,8 +33,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
-    new webpack.DefinePlugin({
-      "process.env": JSON.stringify(process.env),
+    new Dotenv({
+      path: "./.env", // default is .env
     }),
   ],
 };
