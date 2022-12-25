@@ -3,7 +3,7 @@ import axios from "axios";
 export default function callApi(endpoint, method = "GET", data, headers) {
   return axios({
     method: method,
-    url: `http://localhost:8088/${endpoint}`,
+    url: `backendchatapp-production-7ff7.up.railway.app/${endpoint}`,
     data: data,
     headers: headers,
   }).catch((error) => {
