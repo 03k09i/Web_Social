@@ -12,6 +12,7 @@ import {
   rejectFriendAction,
 } from "../../store/actions/friend.actions";
 import { getInfoFriendAction } from "../../store/actions/user.actions";
+import { checkError } from "../../store/actions/showAlert.actions";
 
 export default function ProfileHeader() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export default function ProfileHeader() {
       );
     };
     fetchData();
-  }, [id, dispatch]);
+  }, [id, listFriendRequest, dispatch]);
 
   const addFriend = async () => {
     Swal.fire({
@@ -47,22 +48,24 @@ export default function ProfileHeader() {
       allowOutsideClick: false,
       didOpen: async () => {
         Swal.showLoading();
+        let res = "";
         if (checkFriend) {
           if (checkFriend.status === 1) {
           } else {
             if (checkFriend.sender._id === id) {
-              await dispatch(acceptFriendAction(checkFriend._id));
+              res = await dispatch(acceptFriendAction(checkFriend._id));
             } else {
               if (checkFriend.recever._id === detailUser._id) {
-                await dispatch(rejectFriendAction(checkFriend._id));
+                res = await dispatch(rejectFriendAction(checkFriend._id));
               } else {
-                await dispatch(cancelFriendAction(checkFriend._id));
+                res = await dispatch(cancelFriendAction(checkFriend._id));
               }
             }
           }
         } else {
-          await dispatch(addFriendAction(id));
+          res = await dispatch(addFriendAction(id));
         }
+        await dispatch(checkError(res));
       },
     });
   };
@@ -182,15 +185,17 @@ export default function ProfileHeader() {
               </span>
             </p>
 
-            <NavLink
-              className="profile-header-info-action button primary center"
-              to={`/message/${idChannel}`}
-            >
-              <RiMessengerLine
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <span className="hide-text-mobile">Nhắn tin</span>
-            </NavLink>
+            {checkFriend?.status === 1 ? (
+              <NavLink
+                className="profile-header-info-action button primary center"
+                to={`/message/${idChannel}`}
+              >
+                <RiMessengerLine
+                  style={{ width: 20, height: 20, marginRight: 5 }}
+                />
+                <span className="hide-text-mobile">Nhắn tin</span>
+              </NavLink>
+            ) : null}
           </div>
         ) : null}
       </div>

@@ -28,7 +28,6 @@ export default function ChangePass() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     Swal.fire({
       title: "Wait a minute",
       allowEscapeKey: false,

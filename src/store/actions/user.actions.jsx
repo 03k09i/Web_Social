@@ -23,9 +23,7 @@ export const loginUserAction = (data) => {
 export const registerUserAction = (data) => {
   const add = async (dispatch) => {
     try {
-      const res = await callApi(`auth/register`, "POST", data, {
-        "Content-Type": "multipart/form-data",
-      });
+      const res = await callApi(`auth/register`, "POST", data);
       await dispatch(checkError(res));
       return res;
     } catch (err) {

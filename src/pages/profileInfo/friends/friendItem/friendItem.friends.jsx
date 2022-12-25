@@ -2,7 +2,6 @@ import React from "react";
 
 export default function FriendItem(props) {
   const { itemFriend } = props;
-  console.log(itemFriend, 888);
   return (
     <div className="user-preview small">
       <figure className="user-preview-cover liquid">

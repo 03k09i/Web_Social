@@ -24,7 +24,6 @@ export default function ItemNewsfeed(props) {
   const [checkReact, setCheckReact] = useState(
     itemPost.react.filter((id) => id === detailUser._id)?.[0],
   );
-  console.log(itemPost);
 
   const open = Boolean(showReaction);
   const id = open ? "simple-popper" : undefined;
