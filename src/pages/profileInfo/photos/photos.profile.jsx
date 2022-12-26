@@ -30,7 +30,10 @@ export default function PhotosProfile() {
       <div className="section-header">
         <div className="section-header-info">
           <h2 className="section-title">
-            Timeline Photos <span className="highlighted">28</span>
+            Timeline Photos{" "}
+            {listImage?.length > 0 ? (
+              <span className="highlighted">{listImage?.length}</span>
+            ) : null}
           </h2>
         </div>
 

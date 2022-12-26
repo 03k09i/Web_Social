@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import {
   acceptFriendAction,
   rejectFriendAction,
@@ -21,11 +22,15 @@ export default function ItemFriendHeader(props) {
     await dispatch(rejectFriendAction(itemFriendRequest._id));
     await dispatch(getListFriendRequestAction());
   };
+  console.log(itemFriendRequest);
 
   return (
     <div className="dropdown-box-list-item">
       <div className="user-status request">
-        <a className="user-status-avatar" href="profile-timeline.html">
+        <NavLink
+          className="user-status-avatar"
+          to={`/profile/${itemFriendRequest?.sender?._id}`}
+        >
           <div className="user-avatar small no-outline">
             <div className="user-avatar-content">
               <img
@@ -38,13 +43,18 @@ export default function ItemFriendHeader(props) {
               />
             </div>
           </div>
-        </a>
+        </NavLink>
         <p className="user-status-title">
-          <a className="bold" href="profile-timeline.html">
+          <NavLink
+            className="bold"
+            to={`/profile/${itemFriendRequest?.sender?._id}`}
+          >
             {itemFriendRequest?.sender?.name}
-          </a>
+          </NavLink>
         </p>
-        <p className="user-status-text">6 friends in common</p>
+        {/* <p className="user-status-text">
+          {itemFriendRequest?.sender?.user?.length} friends in common
+        </p> */}
         <div className="action-request-list">
           <div className="action-request accept" onClick={() => acceptFriend()}>
             <svg className="action-request-icon icon-add-friend">

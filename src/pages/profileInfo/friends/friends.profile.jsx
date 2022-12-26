@@ -19,7 +19,10 @@ export default function FriendsProfile() {
           <p className="section-pretitle">Browse Marina's</p>
 
           <h2 className="section-title">
-            Friends <span className="highlighted">82</span>
+            Friends{" "}
+            {listFriend?.length > 0 ? (
+              <span className="highlighted">{listFriend?.length}</span>
+            ) : null}
           </h2>
         </div>
       </div>
