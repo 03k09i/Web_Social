@@ -15,7 +15,7 @@ export default function ListCommentItemNewsfeed(props) {
       await setQuantityComment(res?.result);
     };
     fetchData();
-  }, []);
+  }, [itemPost]);
   const showListComment = (listComment) => {
     let result = null;
     if (listComment?.length > 0) {

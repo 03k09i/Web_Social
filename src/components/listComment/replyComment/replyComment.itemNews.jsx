@@ -5,6 +5,7 @@ import {
   getListCommentAction,
 } from "../../../store/actions/comment.actions";
 import { addNotifyAction } from "../../../store/actions/notify.actions";
+import { getListPostAction } from "../../../store/actions/post.actions";
 
 export default function ReplyComment(props) {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function ReplyComment(props) {
     }
     const res1 = await dispatch(commentPostAction(itemPost._id, result));
     const res = await dispatch(getListCommentAction(itemPost._id));
+    await dispatch(getListPostAction());
     await setListComment(res?.comment);
     await setCommentContent("");
     if (detailUser._id !== itemPost.user._id) {
@@ -64,7 +66,7 @@ export default function ReplyComment(props) {
         <div className="user-avatar-content">
           <img
             src={
-              detailUser.avatar.link ||
+              detailUser?.avatar?.link ||
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
             }
             className="image-avatar-40"
