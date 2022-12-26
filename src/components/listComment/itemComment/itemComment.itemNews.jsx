@@ -74,7 +74,7 @@ export default function ItemCommentItemNewsfeed(props) {
   };
 
   const showItemCommentReply = (listComment) => {
-    let result = [];
+    let result = null;
     if (listComment?.length > 0) {
       result = listComment.map((itemReply, index) => {
         if (itemReply.parent_comment === itemComment._id) {

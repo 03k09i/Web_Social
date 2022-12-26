@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Popper from "@mui/material/Popper";
 import ReactionSmall from "../../reaction/reactionSmall.component";
@@ -71,7 +72,7 @@ export default function ItemCommentReply(props) {
       <p className="post-comment-text">
         <NavLink
           className="post-comment-text-author"
-          to={`/profile/${itemComment?.user?._id}`}
+          to={`/profile/${itemReply?.user?._id}`}
         >
           {itemReply.user.name}
         </NavLink>

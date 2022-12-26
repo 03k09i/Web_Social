@@ -4,7 +4,7 @@ import FriendItem from "./friendItem/friendItem.friends";
 export default function FriendsProfile() {
   const { listFriend } = useSelector((state) => state.friend);
   const showListFriend = (listFriend) => {
-    let result = [];
+    let result = null;
     if (listFriend?.length > 0) {
       result = listFriend.map((itemFriend, index) => {
         return <FriendItem key={index} itemFriend={itemFriend} />;

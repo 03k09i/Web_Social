@@ -17,7 +17,7 @@ export default function ListCommentItemNewsfeed(props) {
     fetchData();
   }, []);
   const showListComment = (listComment) => {
-    let result = [];
+    let result = null;
     if (listComment?.length > 0) {
       result = listComment.map((itemComment, index) => {
         if (!itemComment.parent_comment) {

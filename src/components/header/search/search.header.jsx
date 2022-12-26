@@ -19,7 +19,7 @@ export default function SearchHeader() {
     await setListSearch(res);
   };
   const showListFriend = (listSearch) => {
-    let result = [];
+    let result = null;
     if (listSearch?.length > 0) {
       result = listSearch
         .filter(

@@ -19,7 +19,7 @@ export default function ListNewsfeed() {
     fetchData();
   }, []);
   const showListPost = (listPost) => {
-    let result = [];
+    let result = null;
     if (listPost?.length > 0) {
       result = listPost.map((itemPost, index) => {
         return <ItemNewsfeed key={index} itemPost={itemPost} />;

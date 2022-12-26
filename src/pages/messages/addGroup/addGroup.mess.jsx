@@ -34,7 +34,7 @@ export default function AddGroupMess(props) {
     await setListSearch(res);
   };
   const showListFriend = (listSearch) => {
-    let result = [];
+    let result = null;
     if (listSearch?.length > 0) {
       result = listSearch.map((itemSearch, index) => {
         return (
@@ -56,7 +56,7 @@ export default function AddGroupMess(props) {
     return result;
   };
   const showListUserChannel = (listUser) => {
-    let result = [];
+    let result = null;
     if (listUser?.length > 0) {
       result = listUser.map((itemUser, index) => {
         return (

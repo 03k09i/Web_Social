@@ -40,7 +40,7 @@ export default function PostNewsfeed() {
   };
 
   const showListImg = (filePost) => {
-    let result = [];
+    let result = null;
     if (filePost?.length > 0) {
       result = filePost.map((itemFile, index) => {
         return (
