@@ -84,6 +84,12 @@ function App() {
             });
             await dispatch(getNotifyAction());
           });
+          socket.on("sendfriendrequestclient", async (data) => {
+            await dispatch(getListFriendRequestAction());
+          });
+          socket.on("acceptfriendrequest", async (data) => {
+            await dispatch(getListFriendRequestAction());
+          });
         }
       } else {
         dispatch(setCheckLogin(-1));

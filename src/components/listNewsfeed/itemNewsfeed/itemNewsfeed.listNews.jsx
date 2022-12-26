@@ -11,6 +11,7 @@ import Popper from "@mui/material/Popper";
 import ListReactionNews from "../../listReactionNews/listReactionNews.component";
 import { reactPostAction } from "../../../store/actions/react.actions";
 import { addNotifyAction } from "../../../store/actions/notify.actions";
+import { NavLink } from "react-router-dom";
 
 export default function ItemNewsfeed(props) {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ export default function ItemNewsfeed(props) {
   };
   return (
     <div className="widget-box no-padding">
-      <SetupItemNewsfeed />
+      <SetupItemNewsfeed itemPost={itemPost} />
 
       <div className="widget-box-status">
         <div className="widget-box-status-content">
@@ -61,7 +62,10 @@ export default function ItemNewsfeed(props) {
               <div className="user-avatar small no-outline">
                 <div className="user-avatar-content">
                   <img
-                    src={itemPost?.user?.avatar?.link}
+                    src={
+                      itemPost?.user?.avatar?.link ||
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+                    }
                     className="image-avatar-40"
                     alt="error"
                   />
@@ -70,9 +74,9 @@ export default function ItemNewsfeed(props) {
             </a>
 
             <p className="user-status-title medium">
-              <a className="bold" href="profile-timeline.html">
+              <NavLink className="bold" to={`/profile/${itemPost?.user?._id}`}>
                 {itemPost?.user?.name}
-              </a>
+              </NavLink>
             </p>
 
             <p className="user-status-text small">

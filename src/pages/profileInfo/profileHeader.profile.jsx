@@ -10,6 +10,7 @@ import {
   addFriendAction,
   cancelFriendAction,
   rejectFriendAction,
+  getListFriendRequestAction,
 } from "../../store/actions/friend.actions";
 import { getInfoFriendAction } from "../../store/actions/user.actions";
 import { checkError } from "../../store/actions/showAlert.actions";
@@ -18,6 +19,7 @@ export default function ProfileHeader() {
   const dispatch = useDispatch();
   const { detailUser } = useSelector((state) => state.user);
   const { listFriendRequest } = useSelector((state) => state.friend);
+  const { socket } = useSelector((state) => state.socket);
   const { id } = useParams();
   const [infoUser, setInfoUser] = useState();
   const [idChannel, setIdChannel] = useState();
@@ -54,6 +56,10 @@ export default function ProfileHeader() {
           } else {
             if (checkFriend.sender._id === id) {
               res = await dispatch(acceptFriendAction(checkFriend._id));
+              socket.emit("acceptfriendrequest", {
+                request: { recever: infoUser._id },
+                user: detailUser,
+              });
             } else {
               if (checkFriend.recever._id === detailUser._id) {
                 res = await dispatch(rejectFriendAction(checkFriend._id));
@@ -64,8 +70,13 @@ export default function ProfileHeader() {
           }
         } else {
           res = await dispatch(addFriendAction(id));
+          socket.emit("sendfriendrequest", {
+            request: { recever: infoUser._id },
+            user: detailUser,
+          });
         }
         await dispatch(checkError(res));
+        await dispatch(getListFriendRequestAction());
       },
     });
   };

@@ -14,7 +14,7 @@ export default function ItemChatList(props) {
   const [listSetupItemChat, setListSetupItemChat] = useState(false);
   const open = Boolean(listSetupItemChat);
   const id = open ? "simple-popper" : undefined;
-  console.log(itemChannel);
+
   return (
     <NavLink
       className={

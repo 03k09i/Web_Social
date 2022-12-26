@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   acceptFriendAction,
   rejectFriendAction,
+  getListFriendRequestAction,
 } from "../../../../store/actions/friend.actions";
 
 export default function ItemFriendHeader(props) {
@@ -13,10 +14,12 @@ export default function ItemFriendHeader(props) {
   // function
   const acceptFriend = async () => {
     await dispatch(acceptFriendAction(itemFriendRequest._id));
+    await dispatch(getListFriendRequestAction());
   };
 
   const rejectInvitation = async () => {
     await dispatch(rejectFriendAction(itemFriendRequest._id));
+    await dispatch(getListFriendRequestAction());
   };
 
   return (

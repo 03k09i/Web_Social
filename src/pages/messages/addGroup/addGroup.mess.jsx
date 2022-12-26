@@ -82,7 +82,13 @@ export default function AddGroupMess(props) {
               <div className="user-status-avatar">
                 <div className="user-avatar small no-outline online">
                   <div className="user-avatar-content">
-                    <img src={itemUser.avatar} className="image-avatar-40" />
+                    <img
+                      src={
+                        itemUser.avatar ||
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+                      }
+                      className="image-avatar-40"
+                    />
                   </div>
                 </div>
               </div>

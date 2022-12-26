@@ -30,9 +30,8 @@ export default function UpdateAvatar() {
         <figure className="user-preview-cover liquid">
           <img
             src={
-              cover
-                ? cover
-                : "https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/141092912_845612416014082_5957426372095750825_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=jOufViczPjUAX_OfaO2&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfC5JnVuW3yKc5VZ7BcMhiXbjcABom6IlrPD-3OWWzSdnQ&oe=6380C094"
+              cover ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
             }
             alt="cover-01"
           />
@@ -42,7 +41,11 @@ export default function UpdateAvatar() {
           <div className="user-short-description small">
             <div className="user-short-description-avatar user-avatar">
               <img
-                src={avatar || detailUser?.avatar?.link}
+                src={
+                  avatar ||
+                  detailUser?.avatar?.link ||
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+                }
                 className="image-avatar-100 avatar-border-white mt-10"
                 alt="error"
               />

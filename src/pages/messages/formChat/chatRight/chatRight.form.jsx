@@ -11,7 +11,10 @@ export default function ChatRightForm(props) {
       {onSeen ? (
         <div className="chat-widget-speaker-avatar">
           <img
-            src={"/img/landing/mylove2.jpg"}
+            src={
+              itemMess?.user?.avatar?.link ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+            }
             className="image-avatar-14"
             alt="ERROR"
           />

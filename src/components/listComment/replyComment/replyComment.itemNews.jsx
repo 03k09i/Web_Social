@@ -63,7 +63,10 @@ export default function ReplyComment(props) {
       <div className="user-avatar small no-outline">
         <div className="user-avatar-content">
           <img
-            src={detailUser.avatar.link}
+            src={
+              detailUser.avatar.link ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+            }
             className="image-avatar-40"
             alt="error"
           />

@@ -91,16 +91,16 @@ export default function FormChatMess(props) {
     let result = null;
     if (listMess?.length > 0) {
       result = listMess.map((itemMess, index) => {
-        if (itemMess.user === detailUser._id) {
+        if (itemMess.user._id === detailUser._id) {
           return (
             <ChatRightForm
               key={index}
               itemMess={itemMess}
               onSeen={
-                listMess[index - 1]?.user !== detailUser._id ? true : false
+                listMess[index - 1]?.user._id !== detailUser._id ? true : false
               }
               onReply={
-                listMess[index + 1]?.user !== detailUser._id ? true : false
+                listMess[index + 1]?.user._id !== detailUser._id ? true : false
               }
             />
           );
@@ -111,12 +111,14 @@ export default function FormChatMess(props) {
               itemMess={itemMess}
               onSeen={
                 !listMess[index - 1] ||
-                listMess[index - 1].user !== itemMess.user
+                listMess[index - 1].user._id !== itemMess.user._id
                   ? true
                   : false
               }
               onReply={
-                listMess[index + 1]?.user !== itemMess.user ? true : false
+                listMess[index + 1]?.user._id !== itemMess.user._id
+                  ? true
+                  : false
               }
             />
           );

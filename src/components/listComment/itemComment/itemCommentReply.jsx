@@ -59,16 +59,22 @@ export default function ItemCommentReply(props) {
       <a className="user-avatar small no-outline" href="profile-timeline.html">
         <div className="user-avatar-content">
           <img
-            src={"/img/landing/mylove2.jpg"}
+            src={
+              itemReply?.user?.avatar?.link ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+            }
             className="image-avatar-40"
             alt="error"
           />
         </div>
       </a>
       <p className="post-comment-text">
-        <a className="post-comment-text-author" href="profile-timeline.html">
+        <NavLink
+          className="post-comment-text-author"
+          to={`/profile/${itemComment?.user?._id}`}
+        >
           {itemReply.user.name}
-        </a>
+        </NavLink>
         {itemReply.content}
       </p>
       <div className="content-actions">

@@ -51,7 +51,6 @@ export const addFriendAction = (recever_id, token = Cookies.get("token")) => {
           Authorization: `Bearer ${token}`,
         },
       );
-      await dispatch(getListFriendRequestAction());
       return res;
     } catch (err) {
       return err;
@@ -69,7 +68,6 @@ export const acceptFriendAction = (
       const res = await callApi(`request/accept/${recever_id}`, "PATCH", "", {
         Authorization: `Bearer ${token}`,
       });
-      await dispatch(getListFriendRequestAction());
       return res;
     } catch (err) {
       return err;
@@ -87,7 +85,6 @@ export const cancelFriendAction = (
       const res = await callApi(`request/cancel/${recever_id}`, "DELETE", "", {
         Authorization: `Bearer ${token}`,
       });
-      await dispatch(getListFriendRequestAction());
       return res;
     } catch (err) {
       return err;
@@ -105,7 +102,6 @@ export const rejectFriendAction = (
       const res = await callApi(`request/reject/${recever_id}`, "DELETE", "", {
         Authorization: `Bearer ${token}`,
       });
-      await dispatch(getListFriendRequestAction());
       return res;
     } catch (err) {
       return err;

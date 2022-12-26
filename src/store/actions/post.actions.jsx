@@ -18,6 +18,21 @@ export const postNewsfeedAction = (data, token = Cookies.get("token")) => {
   return add;
 };
 
+export const deleteNewsfeedAction = (id, token = Cookies.get("token")) => {
+  const add = async (dispatch) => {
+    try {
+      const res = await callApi(`post/${id}`, "DELETE", "", {
+        Authorization: `Bearer ${token}`,
+      });
+      await dispatch(checkError(res));
+      return res;
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+};
+
 export const getListPostAction = (token = Cookies.get("token")) => {
   const add = async (dispatch) => {
     try {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import Popper from "@mui/material/Popper";
 import ReactionSmall from "../../reaction/reactionSmall.component";
@@ -11,6 +12,7 @@ import {
 import ItemCommentReply from "./itemCommentReply";
 import ReplyComment from "../replyComment/replyComment.itemNews";
 import { addNotifyAction } from "../../../store/actions/notify.actions";
+import { NavLink } from "react-router-dom";
 
 export default function ItemCommentItemNewsfeed(props) {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ export default function ItemCommentItemNewsfeed(props) {
   const [checkReact, setCheckReact] = useState(
     itemComment.react.filter((id) => id === detailUser._id)?.[0],
   );
+
   const open = Boolean(showReaction);
   const id = open ? "simple-popper" : undefined;
   const open1 = Boolean(setupComment);
@@ -52,14 +55,22 @@ export default function ItemCommentItemNewsfeed(props) {
   };
 
   const deleteComment = async () => {
-    await dispatch(deleteCommentAction(itemComment._id));
-    for (let i = 0; i < listComment.length; i++) {
-      if (listComment[i].parent_comment === itemComment._id) {
-        await dispatch(deleteCommentAction(listComment[i]._id));
+    if (itemComment.user._id === detailUser._id) {
+      await dispatch(deleteCommentAction(itemComment._id));
+      for (let i = 0; i < listComment.length; i++) {
+        if (listComment[i].parent_comment === itemComment._id) {
+          await dispatch(deleteCommentAction(listComment[i]._id));
+        }
       }
+      const res = await dispatch(getListCommentAction(itemPost._id));
+      await setListComment(res?.comment);
+    } else {
+      Swal.fire(
+        "Xóa bình luận thất bại!",
+        "Bạn không có quyền đối với tính năng này",
+        "error",
+      );
     }
-    const res = await dispatch(getListCommentAction(itemPost._id));
-    await setListComment(res?.comment);
   };
 
   const showItemCommentReply = (listComment) => {
@@ -88,16 +99,22 @@ export default function ItemCommentItemNewsfeed(props) {
       <a className="user-avatar small no-outline" href="profile-timeline.html">
         <div className="user-avatar-content">
           <img
-            src={"/img/landing/mylove2.jpg"}
+            src={
+              itemComment?.user?.avatar?.link ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+            }
             className="image-avatar-40"
             alt="error"
           />
         </div>
       </a>
       <p className="post-comment-text">
-        <a className="post-comment-text-author" href="profile-timeline.html">
+        <NavLink
+          className="post-comment-text-author"
+          to={`/profile/${itemComment?.user?._id}`}
+        >
           {itemComment.user.name}
-        </a>
+        </NavLink>
         {itemComment.content}
       </p>
       <div className="content-actions">
