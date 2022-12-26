@@ -20,6 +20,18 @@ module.exports = {
         test: /\.css$/, // Sử dụng style-loader, css-loader cho file .css
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "svg-url-loader",
+            options: {
+              limit: 10000,
+              jsx: true,
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {

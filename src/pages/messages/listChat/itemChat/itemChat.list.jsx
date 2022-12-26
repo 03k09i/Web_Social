@@ -14,6 +14,7 @@ export default function ItemChatList(props) {
   const [listSetupItemChat, setListSetupItemChat] = useState(false);
   const open = Boolean(listSetupItemChat);
   const id = open ? "simple-popper" : undefined;
+  console.log(itemChannel);
   return (
     <NavLink
       className={
@@ -47,7 +48,7 @@ export default function ItemChatList(props) {
         </p>
         <p className="user-status-text">{itemChannel?.last_message?.content}</p>
         <p className="user-status-timestamp floaty">
-          {moment(itemChannel.last_message_time, "YYYYMMDD").fromNow()}
+          {moment(itemChannel.last_message_time).fromNow()}
         </p>
         <div
           aria-describedby={id}

@@ -40,14 +40,13 @@ function App() {
   useEffect(() => {
     const getInfo = async () => {
       const token = Cookies.get("token");
-      console.log(process.env.Server_host);
       if (token && checkLogin) {
         const res = await dispatch(getInfoUserAction());
         await dispatch(getListFriendRequestAction());
         await dispatch(getListChannelAction());
         await dispatch(getListFriendAction());
         await dispatch(getNotifyAction());
-        const socket = io(process.env.Server_host);
+        const socket = io("http://localhost:8088/");
         await dispatch(setSocket(socket));
         if (res) {
           socket.emit("userJoin", {

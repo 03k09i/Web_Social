@@ -69,6 +69,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.0.3",
-    "dotenv-webpack": "^8.0.1"
+    "dotenv-webpack": "^8.0.1",
+    "svg-url-loader": "^8.0.0"
   }
 }

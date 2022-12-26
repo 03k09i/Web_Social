@@ -36,7 +36,7 @@ export default function ItemNotifyHeader(props) {
           </a> */}
         </p>
         <p className="user-status-timestamp">
-          {moment(itemNotify.createdAt, "YYYYMMDD").fromNow()}
+          {moment(itemNotify.createdAt).fromNow()}
         </p>
         <div className="user-status-icon">
           {itemNotify?.content ? (

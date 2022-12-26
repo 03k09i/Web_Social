@@ -1,7 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useParams, NavLink } from "react-router-dom";
 
 export default function SectionNavProfile() {
+  const { id } = useParams();
+  const { detailUser } = useSelector((state) => state.user);
   return (
     <nav className="section-navigation">
       <div id="section-navigation-slider" className="section-menu">
@@ -12,13 +15,15 @@ export default function SectionNavProfile() {
 
           <p className="section-menu-item-text">Newfeeds</p>
         </NavLink>
-        <NavLink className="section-menu-item" to="infoProfile">
-          <svg className="section-menu-item-icon icon-profile">
-            <use xlinkHref="#svg-profile" />
-          </svg>
+        {detailUser?._id === id ? (
+          <NavLink className="section-menu-item" to="infoProfile">
+            <svg className="section-menu-item-icon icon-profile">
+              <use xlinkHref="#svg-profile" />
+            </svg>
 
-          <p className="section-menu-item-text">Info</p>
-        </NavLink>
+            <p className="section-menu-item-text">Info</p>
+          </NavLink>
+        ) : null}
         <NavLink className="section-menu-item" to="friendsProfile">
           <svg className="section-menu-item-icon icon-friend">
             <use xlinkHref="#svg-friend" />

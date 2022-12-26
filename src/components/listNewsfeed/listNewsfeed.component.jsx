@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import callApi from "../../utils/callApi";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingComponent from "../loading/loading.component";
 import ItemNewsfeed from "./itemNewsfeed/itemNewsfeed.listNews";
+import { getListPostAction } from "../../store/actions/post.actions";
 
 export default function ListNewsfeed() {
-  const [listPost, setListPost] = useState();
+  const dispatch = useDispatch();
+  const { listPost } = useSelector((state) => state.post);
+  // const [listPost, setListPost] = useState();
   useEffect(() => {
     const fetchData = async () => {
       const token = Cookies.get("token");
       if (token) {
-        const res = await callApi(`post`, "GET", "", {
-          Authorization: `Bearer ${token}`,
-        });
-        await setListPost(res?.data);
+        const res = dispatch(getListPostAction());
       }
     };
     fetchData();

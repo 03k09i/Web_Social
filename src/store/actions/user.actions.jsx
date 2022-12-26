@@ -88,6 +88,20 @@ export const getInfoUserAction = (token = Cookies.get("token")) => {
   return add;
 };
 
+export const getImageUserAction = (id, token = Cookies.get("token")) => {
+  const add = async (dispatch) => {
+    try {
+      const res = await callApi(`user/listimage/${id}`, "GET", "", {
+        Authorization: `Bearer ${token}`,
+      });
+      return res?.data;
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+};
+
 export const getInfoFriendAction = (id, token = Cookies.get("token")) => {
   const add = async (dispatch) => {
     try {

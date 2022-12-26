@@ -168,7 +168,7 @@ export default function ItemCommentItemNewsfeed(props) {
 
           <div className="meta-line">
             <p className="meta-line-timestamp">
-              {moment(itemComment.createdAt, "YYYYMMDD").fromNow()}
+              {moment(itemComment.createdAt).fromNow()}
             </p>
           </div>
 

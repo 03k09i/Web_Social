@@ -44,7 +44,7 @@ export default function SidebarListFriendHeader() {
                 {itemMess?.last_message?.content}
               </p>
               <p className="user-status-timestamp floaty">
-                {moment(itemMess.last_message_time, "YYYYMMDD").fromNow()}
+                {moment(itemMess.last_message_time).fromNow()}
               </p>
             </div>
           </NavLink>

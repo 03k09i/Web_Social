@@ -2,7 +2,10 @@ import React from "react";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postNewsfeedAction } from "../../../store/actions/post.actions";
+import {
+  postNewsfeedAction,
+  getListPostAction,
+} from "../../../store/actions/post.actions";
 
 export default function PostNewsfeed() {
   const dispatch = useDispatch();
@@ -26,6 +29,7 @@ export default function PostNewsfeed() {
             await result.append("files", filePost[i]);
           }
           await dispatch(postNewsfeedAction(result));
+          await dispatch(getListPostAction());
           setContentPost("");
           setFilePost([]);
         } catch (error) {

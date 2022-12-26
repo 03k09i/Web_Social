@@ -76,7 +76,7 @@ export default function ItemNewsfeed(props) {
             </p>
 
             <p className="user-status-text small">
-              {moment(itemPost?.createdAt, "YYYYMMDD").fromNow()}
+              {moment(itemPost?.createdAt).fromNow()}
             </p>
           </div>
 

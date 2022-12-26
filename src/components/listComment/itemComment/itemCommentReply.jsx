@@ -136,7 +136,7 @@ export default function ItemCommentReply(props) {
 
           <div className="meta-line">
             <p className="meta-line-timestamp">
-              {moment(itemReply.createdAt, "YYYYMMDD").fromNow()}
+              {moment(itemReply.createdAt).fromNow()}
             </p>
           </div>
 

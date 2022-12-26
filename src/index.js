@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store/reducers/root.reducer";
 import "../public/css/raw/styles.css";
+import "../public/js/utils/svg-loader.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

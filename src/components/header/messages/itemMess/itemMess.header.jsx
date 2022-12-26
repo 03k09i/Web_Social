@@ -42,7 +42,7 @@ export default function ItemMessagesHeader(props) {
         </p>
         <p className="user-status-text">{itemMess?.last_message?.content}</p>
         <p className="user-status-timestamp floaty">
-          {moment(itemMess.last_message_time, "YYYYMMDD").fromNow()}
+          {moment(itemMess.last_message_time).fromNow()}
         </p>
       </div>
     </div>
