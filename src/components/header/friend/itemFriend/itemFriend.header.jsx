@@ -22,7 +22,6 @@ export default function ItemFriendHeader(props) {
     await dispatch(rejectFriendAction(itemFriendRequest._id));
     await dispatch(getListFriendRequestAction());
   };
-  console.log(itemFriendRequest);
 
   return (
     <div className="dropdown-box-list-item">

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import ClickOutside from "../../clickOutside/clickOutside.component";
 import ItemFriendHeader from "./itemFriend/itemFriend.header";
 
@@ -64,15 +65,9 @@ export default function FriendHeader() {
           <div className="dropdown-box-list no-hover" data-simplebar>
             {showListFriendRequest(listFriendRequest)}
           </div>
-          {/* <a
-            className="dropdown-box-button secondary"
-            href="hub-profile-requests.html"
-          >
+          <NavLink className="dropdown-box-button secondary" to="/friend">
             View all Requests
-          </a> */}
-          <div className="header-viewMore">
-            <a href="/friend"><p>View more ...</p></a>
-          </div>
+          </NavLink>
         </div>
       ) : null}
     </div>
