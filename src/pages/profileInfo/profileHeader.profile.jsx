@@ -75,8 +75,8 @@ export default function ProfileHeader() {
             user: detailUser,
           });
         }
-        await dispatch(checkError(res));
         await dispatch(getListFriendRequestAction());
+        await dispatch(checkError(res));
       },
     });
   };
