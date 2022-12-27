@@ -167,7 +167,7 @@ export default function FormChatMess(props) {
           <div ref={endForm}></div>
           {entering === 1 ? <WaitChatLeftMess /> : null}
           {showListMess(listMess)}
-          <div
+          {/* <div
             style={{
               width: "100%",
               display: "flex",
@@ -176,7 +176,7 @@ export default function FormChatMess(props) {
             }}
           >
             <p style={{ padding: 3, fontSize: 14 }}>kiet d</p>
-          </div>
+          </div> */}
         </InfiniteScroll>
       </div>
       {atBottom ? null : <IconDropDownMess dropDown={dropDown} />}

@@ -55,3 +55,31 @@ export const readMessageAction = (id, token = Cookies.get("token")) => {
   };
   return add;
 };
+
+export const deleteMessageAction = (id, token = Cookies.get("token")) => {
+  const add = async (dispatch) => {
+    try {
+      const res = await callApi(`message/delete/${id}`, "PATCH", "", {
+        Authorization: `Bearer ${token}`,
+      });
+      return res?.data;
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+};
+
+export const removeMessageAction = (id, token = Cookies.get("token")) => {
+  const add = async (dispatch) => {
+    try {
+      const res = await callApi(`message/remove/${id}`, "PATCH", "", {
+        Authorization: `Bearer ${token}`,
+      });
+      return res?.data;
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+};
