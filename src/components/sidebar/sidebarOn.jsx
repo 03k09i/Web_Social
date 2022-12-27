@@ -1,13 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function SidebarOnHeader() {
+  const { detailUser } = useSelector((state) => state.user);
   return (
     <nav
       id="navigation-widget"
-      className="navigation-widget navigation-widget-desktop sidebar left delayed"
+      className="navigation-widget navigation-widget1 navigation-widget-desktop sidebar sidebar1 left delayed"
       data-simplebar
     >
-      <figure className="navigation-widget-cover liquid">
+      {/* <figure className="navigation-widget-cover liquid">
         <img src={"/img/cover/01.jpg"} alt="cover-01" />
       </figure>
       <div className="user-short-description">
@@ -23,8 +25,8 @@ export default function SidebarOnHeader() {
         <p className="user-short-description-text">
           <a href="#">www.gamehuntress.com</a>
         </p>
-      </div>
-      <div className="user-stats">
+      </div> */}
+      {/* <div className="user-stats1">
         <div className="user-stat">
           <p className="user-stat-title">930</p>
           <p className="user-stat-text">posts</p>
@@ -37,16 +39,23 @@ export default function SidebarOnHeader() {
           <p className="user-stat-title">5.7k</p>
           <p className="user-stat-text">visits</p>
         </div>
-      </div>
-      <ul className="menu">
+        
+      </div> */}
+      <ul className="menu menu1">
         <li className="menu-item">
-          <a className="menu-item-link" href="newsfeed.html">
-            <svg className="menu-item-link-icon icon-newsfeed">
-              <use xlinkHref="#svg-newsfeed" />
-            </svg>
-            Newsfeed
+          <a className="menu-item-link menu-item-rela" href="newsfeed.html">
+            <div className="menu-item-link-icon icon-overview">
+              <img className="imgAvatar" src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png"/>
+            </div>
+            {detailUser.name}
           </a>
         </li>
+        </ul>
+        
+        <div className="lineX"></div>
+        
+        <ul className="menu menu2">
+          <p style={{fontWeight: "bold", padding:"0 16px", margin: "10px 10px 10px 0"}}>Truy cap nhanh</p>
         <li className="menu-item">
           <a className="menu-item-link" href="overview.html">
             <svg className="menu-item-link-icon icon-overview">
@@ -77,46 +86,6 @@ export default function SidebarOnHeader() {
               <use xlinkHref="#svg-badges" />
             </svg>
             Badges
-          </a>
-        </li>
-        <li className="menu-item">
-          <a className="menu-item-link" href="quests.html">
-            <svg className="menu-item-link-icon icon-quests">
-              <use xlinkHref="#svg-quests" />
-            </svg>
-            Quests
-          </a>
-        </li>
-        <li className="menu-item">
-          <a className="menu-item-link" href="streams.html">
-            <svg className="menu-item-link-icon icon-streams">
-              <use xlinkHref="#svg-streams" />
-            </svg>
-            Streams
-          </a>
-        </li>
-        <li className="menu-item">
-          <a className="menu-item-link" href="events.html">
-            <svg className="menu-item-link-icon icon-events">
-              <use xlinkHref="#svg-events" />
-            </svg>
-            Events
-          </a>
-        </li>
-        <li className="menu-item">
-          <a className="menu-item-link" href="forums.html">
-            <svg className="menu-item-link-icon icon-forums">
-              <use xlinkHref="#svg-forums" />
-            </svg>
-            Forums
-          </a>
-        </li>
-        <li className="menu-item">
-          <a className="menu-item-link" href="marketplace.html">
-            <svg className="menu-item-link-icon icon-marketplace">
-              <use xlinkHref="#svg-marketplace" />
-            </svg>
-            Marketplace
           </a>
         </li>
       </ul>

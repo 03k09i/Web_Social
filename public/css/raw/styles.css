@@ -1694,6 +1694,23 @@ textarea::placeholder {
   grid-area: sidebar;
 }
 
+.grid.grid-6-6 {
+  grid-template-areas: 'content sidebar';
+  grid-template-columns: 49% 49%;
+}
+
+.grid.grid-6-6 > .grid-column:nth-child(1) {
+  grid-area: content;
+}
+
+.grid.grid-6-6 > .grid-column:nth-child(2) {
+  grid-area: sidebar;
+}
+
+.grid.grid-2-6-4 {
+  grid-template-areas: 'content sidebar';
+  grid-template-columns: 16% 45% 34%;
+}
 .grid.grid-6-3 {
   grid-template-areas: 'content sidebar';
   grid-template-columns: 49.3243243243% 23.9864864865%;
@@ -1736,7 +1753,17 @@ textarea::placeholder {
   grid-template-areas: 'sidebar header header header'
  'sidebar content content contentsidebar';
 }
-
+.header-viewMore {
+  text-align: center;
+}
+.header-viewMore::before {
+  content: "";
+  display:block;
+  height: 1px;
+  width: 100%;
+  background: black;
+  opacity: 0.3;
+}
 .grid.grid-layout-1 .grid-sidebar {
   grid-area: sidebar;
 }
@@ -2793,7 +2820,29 @@ figure > img {
   -ms-flex-pack: center;
       justify-content: center;
 }
-
+.menu-item-rela {
+  position: relative;
+}
+.imgAvatar {
+  border-radius:50%;
+  transform: translateY(-50%);
+  object-fit: contain;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 50%
+}
+.lineX {
+  display:block;
+  height:1px;
+  width: 95%;
+  background: #000;
+  margin: 10px auto;
+}
+.contentFlex {
+  display: flex;
+  align-items:center
+}
 .user-stats .user-stat {
   position: relative;
 }
@@ -2831,7 +2880,7 @@ figure > img {
   margin: 0 auto 20px;
 }
 
-.user-stat.big .user-stat-title {
+.user-stat.big .user-stat-title, .user-stats1 .user-stat-title {
   font-size: 1.375rem;
 }
 
@@ -2840,13 +2889,13 @@ figure > img {
 }
 
 .user-stat .user-stat-title,
-.user-stat .user-stat-text {
+.user-stat .user-stat-text, .user-stats1 .user-stat-title {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
 }
 
-.user-stat .user-stat-title {
+.user-stat .user-stat-title, .user-stats1 .user-stat-title {
   font-size: 0.875rem;
 }
 
@@ -10131,9 +10180,12 @@ figure > img {
 .navigation-widget {
   width: 300px;
   padding-bottom: 40px;
-  background-color: #fff;
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+  background-color: transparent;
+  box-shadow: none;
   position: relative;
+}
+.navigation-widget1 {
+  width: 400px !important;
 }
 
 .navigation-widget .navigation-widget-close-button {
@@ -10247,6 +10299,30 @@ figure > img {
 
 .navigation-widget .menu {
   margin-top: 60px;
+}
+.navigation-widget .menu1 {
+  margin-top: 30px !important;
+}
+.navigation-widget .menu2 {
+  margin-top: 10px !important;
+  overflow-y: auto;
+  height: 100vh
+}
+.navigation-widget .menu2::-webkit-scrollbar{
+  width: 6px !important;
+  background-color: #F5F5F5 !important;
+  display: block !important;
+}
+
+.navigation-widget .menu2::-webkit-scrollbar-track {
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+.navigation-widget .menu2::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: lightgray;
 }
 
 .navigation-widget .menu + .navigation-widget-section-title {
@@ -15269,7 +15345,9 @@ figure > img {
   position: relative;
   transition: all .2s ease-in-out;
 }
-
+.menu .menu-item .menuItemLink {
+  padding: 0;
+}
 .menu .menu-item .menu-item-link:hover {
   background-color: #fff;
   color: #3e3f5e;
@@ -15450,6 +15528,9 @@ figure > img {
   transition: -webkit-transform .35s ease-in-out;
   transition: transform .35s ease-in-out;
   transition: transform .35s ease-in-out, -webkit-transform .35s ease-in-out;
+}
+.sidebar1.navigation-widget {
+  overflow-y: hidden !important;
 }
 
 .sidebar.navigation-widget.navigation-widget-mobile {
@@ -16660,3 +16741,33 @@ figure > img {
   border-radius: 12px;
 }
 
+/* new page */
+.contentFriendPage {
+  padding-top: 80px;
+}
+.widget-box-friend {
+  height: calc(100vh - 120px);
+  margin: 20px 0 20px 20px;
+  padding: 20px 0 !important;
+}
+.contentFriendPage .widget-box-content-friend {
+  height: calc(100vh - 120px);
+  margin: 20px 20px 20px 0px;
+  padding: 20px 16px !important;
+}
+.content-list-friend {
+  padding-top: 20px
+}
+.item-friend {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.img-friend img {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}

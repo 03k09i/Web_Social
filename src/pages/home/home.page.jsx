@@ -12,16 +12,19 @@ import MessagesPage from "../messages/messages.page";
 import NewsfeedPage from "../newsfeed/newsfeed.page";
 import ProfileInfoPage from "../profileInfo/profileInfo.page";
 import GroupInfoPage from "../groupInfo/groupInfo.page";
+import FriendList from "../profileInfo/friends/friendList";
 
 export default function Home() {
   const { showPopupNewsfeed } = useSelector((state) => state.popupNewsfeed);
+  const homeUrl = window?.location?.pathname === "/";
   return (
     <div>
       {showPopupNewsfeed ? <PopupNewsfeed /> : null}
-      <SidebarHeader />
-      {/* <SidebarOnHeader /> */}
+      {/* <SidebarHeader /> */}
+      {homeUrl && <SidebarOnHeader />}
+      {/* <NewsfeedPage /> */}
       {/* <SidebarMobieHeader /> */}
-      <SidebarListFriendHeader />
+      {/* <SidebarListFriendHeader /> */}
       {/* <SidebarItemFriendHeader /> */}
       <Header />
       <Routes>
@@ -29,6 +32,7 @@ export default function Home() {
         <Route path="/profile/:id/*" element={<ProfileInfoPage />} />
         <Route path="/group/*" element={<GroupInfoPage />} />
         <Route path="/message/:idChannel" element={<MessagesPage />} />
+        <Route path="/friend" element={<FriendList/>} />
       </Routes>
     </div>
   );
