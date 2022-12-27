@@ -26,17 +26,20 @@ export default function PhotosProfile() {
     return result;
   };
   return (
-    <section className="section" style={{ marginBottom: 30 }}>
+    <section className="section" style={{ marginBottom: 100 }}>
       <div className="section-header">
         <div className="section-header-info">
           <h2 className="section-title">
-            Timeline Photos <span className="highlighted">28</span>
+            Timeline Photos{" "}
+            {listImage?.length > 0 ? (
+              <span className="highlighted">{listImage?.length}</span>
+            ) : null}
           </h2>
         </div>
 
-        <div className="section-header-actions">
+        {/* <div className="section-header-actions">
           <p className="section-header-action">Add Photos +</p>
-        </div>
+        </div> */}
       </div>
 
       <div className="grid grid-2-2-2-2-2-2 centered">

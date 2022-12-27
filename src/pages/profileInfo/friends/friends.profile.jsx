@@ -13,13 +13,16 @@ export default function FriendsProfile() {
     return result;
   };
   return (
-    <section className="section" style={{ marginBottom: 30 }}>
+    <section className="section" style={{ marginBottom: 100 }}>
       <div className="section-header">
         <div className="section-header-info">
-          <p className="section-pretitle">Browse Marina's</p>
+          {/* <p className="section-pretitle">Browse Marina's</p> */}
 
           <h2 className="section-title">
-            Friends <span className="highlighted">82</span>
+            Friends{" "}
+            {listFriend?.length > 0 ? (
+              <span className="highlighted">{listFriend?.length}</span>
+            ) : null}
           </h2>
         </div>
       </div>

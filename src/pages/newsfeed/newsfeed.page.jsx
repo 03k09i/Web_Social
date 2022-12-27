@@ -73,7 +73,7 @@ export default function NewsfeedPage() {
           <ListNewsfeed />
         </div>
         <div className="grid-column">
-          {/* <div className="widget-box">
+          <div className="widget-box">
             <div className="widget-box-settings">
               <div className="post-settings-wrap">
                 <div className="post-settings widget-box-post-settings-dropdown-trigger">
@@ -84,7 +84,7 @@ export default function NewsfeedPage() {
               </div>
             </div>
 
-            <p className="widget-box-title">Friends Activity</p>
+            <p className="widget-box-title">Lien he</p>
 
             <div className="widget-box-content">
               <div className="user-status-list">
@@ -400,7 +400,7 @@ export default function NewsfeedPage() {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

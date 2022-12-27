@@ -46,7 +46,7 @@ function App() {
         await dispatch(getListChannelAction());
         await dispatch(getListFriendAction());
         await dispatch(getNotifyAction());
-        const socket = io("http://localhost:8088/");
+        const socket = io(process.env.Server_host);
         await dispatch(setSocket(socket));
         if (res) {
           socket.emit("userJoin", {

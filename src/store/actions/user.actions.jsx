@@ -53,6 +53,7 @@ export const updateUserAction = (data, token = Cookies.get("token")) => {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       });
+      console.log(res?.data);
       if (res?.data?.message) {
         await dispatch(getInfoUserAction());
       }

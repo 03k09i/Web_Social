@@ -12,6 +12,7 @@ import ListReactionNews from "../../listReactionNews/listReactionNews.component"
 import { reactPostAction } from "../../../store/actions/react.actions";
 import { addNotifyAction } from "../../../store/actions/notify.actions";
 import { NavLink } from "react-router-dom";
+import { getListPostAction } from "../../../store/actions/post.actions";
 
 export default function ItemNewsfeed(props) {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function ItemNewsfeed(props) {
   const reactPost = async () => {
     await dispatch(reactPostAction(itemPost._id));
     await setCheckReact(!checkReact);
+    await dispatch(getListPostAction());
     if (!checkReact && detailUser._id !== itemPost.user._id) {
       await dispatch(
         addNotifyAction({
@@ -93,21 +95,21 @@ export default function ItemNewsfeed(props) {
 
         {/* <VideoItemNews /> */}
 
-        {/* <div className="widget-box-status-content">
+        <div className="widget-box-status-content">
           <div className="content-actions">
-            <ListReactionNews />
+            <ListReactionNews itemPost={itemPost} />
 
             <div className="content-action">
               <div className="meta-line">
                 <p className="meta-line-link">{quantityComment} Comments</p>
               </div>
 
-              <div className="meta-line">
+              {/* <div className="meta-line">
                 <p className="meta-line-text">0 Shares</p>
-              </div>
+              </div> */}
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
 
       <div className="post-options">
