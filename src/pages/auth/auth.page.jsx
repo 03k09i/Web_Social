@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Login from "./login/login.auth";
 import Register from "./register/register.auth";
+import ResetPass from "./reset_pass/reset_pass.auth";
 
 export default function Auth() {
   const { pathname } = useLocation();
@@ -30,6 +31,7 @@ export default function Auth() {
             to={"login"}
           >
             Login
+            
           </NavLink>
           <NavLink
             className={
@@ -48,6 +50,7 @@ export default function Auth() {
           <Route path="/" element={<Navigate replace to={"login"} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/resetpass" element={<ResetPass />} />
         </Routes>
       </div>
     </div>

@@ -3,9 +3,17 @@ import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoWarningOutline } from "react-icons/io5";
 import { loginUserAction } from "../../../store/actions/user.actions";
+
+import {
+  Navigate,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -117,9 +125,9 @@ export default function Login() {
             </div>
           </div>
           <div className="form-item">
-            <a className="form-link" href="/#">
+            <NavLink className="form-link" to={'/auth/resetpass'}>
               Forgot Password?
-            </a>
+            </NavLink>
           </div>
         </div>
         <div className="form-row">

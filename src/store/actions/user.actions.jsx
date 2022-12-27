@@ -33,6 +33,19 @@ export const registerUserAction = (data) => {
   return add;
 };
 
+export const resetPasswordAction = (data) => {
+  const add = async (dispatch) => {
+    try {
+      console.log(data)
+      const res = await callApi(`auth/resetpass`, "POST", data);
+      return res;
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+};
+
 export const updateUserAction = (data, token = Cookies.get("token")) => {
   const add = async (dispatch) => {
     try {
