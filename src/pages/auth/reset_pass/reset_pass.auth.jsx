@@ -3,19 +3,12 @@ import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoWarningOutline } from "react-icons/io5";
-import { loginUserAction } from "../../../store/actions/user.actions";
+import { resetPasswordAction } from "../../../store/actions/user.actions";
 
-import {
-  Navigate,
-  NavLink,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
 
-export default function Login() {
+export default function ResetPass() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -44,9 +37,9 @@ export default function Login() {
       allowOutsideClick: false,
       didOpen: async () => {
         Swal.showLoading();
-        const res = await dispatch(loginUserAction(data));
+        const res = await dispatch(resetPasswordAction(data));
         if (res?.data?.message) {
-          Swal.fire("SUCCESS", res.data.message, "success");
+          Swal.fire("SUCCESS", "Đã đặt lại mật khẩu", "success");
           await navigate("/");
         } else {
           Swal.fire("ERROR", res.message, "error");
@@ -63,26 +56,26 @@ export default function Login() {
         alt="rocket"
         style={{ width: 100, height: 100 }}
       />
-      <h2 className="form-box-title">Account Login</h2>
+      <h2 className="form-box-title">Forgot Password</h2>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-row">
           <div className="form-item">
             <div
               className={
-                focusInput === "username" || getValues("username")
+                focusInput === "email" || getValues("email")
                   ? "form-input active"
                   : "form-input"
               }
             >
-              <label>Phone or Email</label>
+              <label>Email address</label>
               <input
                 type="text"
-                name="username"
-                {...register("username", { required: true })}
-                onFocus={() => setFocusInput("username")}
+                name="email"email
+                {...register("email", { required: true })}
+                onFocus={() => setFocusInput("email")}
                 onBlur={() => setFocusInput()}
               />
-              {showWarning("username")}
+              {showWarning("email")}
             </div>
           </div>
         </div>
@@ -90,67 +83,32 @@ export default function Login() {
           <div className="form-item">
             <div
               className={
-                focusInput === "password" || getValues("password")
+                focusInput === "phone" || getValues("phone")
                   ? "form-input active"
                   : "form-input"
               }
             >
-              <label>Password</label>
+              <label>Phone number</label>
               <input
-                type="password"
-                name="password"
-                {...register("password", { required: true })}
-                onFocus={() => setFocusInput("password")}
+                type="text"
+                name="phone"
+                {...register("phone", { required: true })}
+                onFocus={() => setFocusInput("phone")}
                 onBlur={() => setFocusInput()}
               />
-              {showWarning("password")}
+              {showWarning("phone")}
             </div>
           </div>
         </div>
-        <div className="form-row space-between">
-          <div className="form-item">
-            <div className="checkbox-wrap">
-              <input
-                type="checkbox"
-                id="login-remember"
-                name="login_remember"
-                defaultChecked
-              />
-              <div className="checkbox-box">
-                <svg className="icon-cross">
-                  <use xlinkHref="#svg-cross" />
-                </svg>
-              </div>
-              <label htmlFor="login-remember">Remember Me</label>
-            </div>
-          </div>
-          <div className="form-item">
-            <NavLink className="form-link" to={'/auth/resetpass'}>
-              Forgot Password?
-            </NavLink>
-          </div>
-        </div>
+        <div style={{"marginTop":"40px"}}></div>
         <div className="form-row">
           <div className="form-item">
             <button className="button medium secondary">
-              Login to your Account!
+              Reset Password
             </button>
           </div>
         </div>
       </form>
-      <p className="lined-text">Login with your Social Account</p>
-      <div className="social-links">
-        <a className="social-link facebook" href="/#">
-          <svg className="icon-facebook">
-            <use xlinkHref="#svg-facebook" />
-          </svg>
-        </a>
-        <a className="social-link twitter" href="/#">
-          <svg className="icon-twitter">
-            <use xlinkHref="#svg-twitter" />
-          </svg>
-        </a>
-      </div>
     </div>
   );
 }
