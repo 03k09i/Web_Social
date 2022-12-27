@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import ItemChatRight from "./itemChatRight/item.chatRight";
 
 export default function ChatRightForm(props) {
   const { itemMess, onSeen, onReply } = props;
-  return (
+  const [hideMess, setHideMess] = useState(false);
+  return !hideMess ? (
     <div
       className="chat-widget-speaker right"
       style={{ marginTop: !onReply ? 0 : 16 }}
@@ -20,7 +21,11 @@ export default function ChatRightForm(props) {
           />
         </div>
       ) : null}
-      <ItemChatRight itemMess={itemMess} onSeen={onSeen} />
+      <ItemChatRight
+        itemMess={itemMess}
+        onSeen={onSeen}
+        setHideMess={setHideMess}
+      />
     </div>
-  );
+  ) : null;
 }

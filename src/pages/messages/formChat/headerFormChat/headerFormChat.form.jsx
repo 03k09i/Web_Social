@@ -18,7 +18,7 @@ export default function HeaderFormChat(props) {
                   detailChannel?.num_member === 2
                     ? detailChannel?.user.filter(
                         (item) => item._id !== detailUser._id,
-                      )[0].avatar.link
+                      )[0]?.avatar?.link
                     : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
                 }
                 className="image-avatar-40"

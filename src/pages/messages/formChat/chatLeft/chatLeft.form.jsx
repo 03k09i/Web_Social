@@ -3,7 +3,7 @@ import ItemChatLeft from "./itemChatLeft/item.chatLeft";
 
 export default function ChatLeftForm(props) {
   const { itemMess, onSeen, onReply } = props;
-  console.log(itemMess);
+
   return (
     <div
       className="chat-widget-speaker left"
