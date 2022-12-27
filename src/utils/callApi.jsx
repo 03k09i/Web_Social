@@ -3,7 +3,7 @@ import axios from "axios";
 export default function callApi(endpoint, method = "GET", data, headers) {
   return axios({
     method: method,
-    url: `http://localhost:8088/${endpoint}`,
+    url: `${process.env.Server_host}/${endpoint}`,
     data: data,
     headers: headers,
   }).catch((error) => {

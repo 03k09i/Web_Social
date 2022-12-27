@@ -70,6 +70,9 @@ export default function FriendHeader() {
           >
             View all Requests
           </a> */}
+          <div className="header-viewMore">
+            <a href="/friend"><p>View more ...</p></a>
+          </div>
         </div>
       ) : null}
     </div>
