@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Header from "../../components/header/header";
@@ -16,12 +16,11 @@ import FriendList from "../profileInfo/friends/friendList";
 
 export default function Home() {
   const { showPopupNewsfeed } = useSelector((state) => state.popupNewsfeed);
-  const homeUrl = window?.location?.pathname === "/";
   return (
     <div>
       {showPopupNewsfeed ? <PopupNewsfeed /> : null}
       {/* <SidebarHeader /> */}
-      {homeUrl && <SidebarOnHeader />}
+      {/* {homeUrl && <SidebarOnHeader />} */}
       {/* <NewsfeedPage /> */}
       {/* <SidebarMobieHeader /> */}
       {/* <SidebarListFriendHeader /> */}

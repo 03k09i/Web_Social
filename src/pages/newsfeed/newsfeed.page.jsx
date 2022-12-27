@@ -1,5 +1,6 @@
 import React from "react";
 import ListNewsfeed from "../../components/listNewsfeed/listNewsfeed.component";
+import SidebarOnHeader from "../../components/sidebar/sidebarOn";
 import PostNewsfeed from "./postNewsfeed/postNewsfeed.newsfeed";
 
 export default function NewsfeedPage() {
@@ -67,13 +68,14 @@ export default function NewsfeedPage() {
               </div>
             </div>
           </div> */}
+          <SidebarOnHeader />
         </div>
         <div className="grid-column">
           <PostNewsfeed />
           <ListNewsfeed />
         </div>
         <div className="grid-column">
-          <div className="widget-box">
+          <div style={{width:"400px"}}><div className="widget-box">
             <div className="widget-box-settings">
               <div className="post-settings-wrap">
                 <div className="post-settings widget-box-post-settings-dropdown-trigger">
@@ -400,7 +402,8 @@ export default function NewsfeedPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
+          
         </div>
       </div>
     </div>
