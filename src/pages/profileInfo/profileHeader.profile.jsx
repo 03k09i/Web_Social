@@ -14,6 +14,7 @@ import {
 } from "../../store/actions/friend.actions";
 import { getInfoFriendAction } from "../../store/actions/user.actions";
 import { checkError } from "../../store/actions/showAlert.actions";
+import { addShortCutAction } from '../../store/actions/shortcut.actions'
 
 export default function ProfileHeader() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function ProfileHeader() {
       await setInfoUser(res?.data);
       await setIdChannel(res?.channel);
       await setImage(res?.data?.avatar?.link);
+      await dispatch(addShortCutAction({ shortcut: id }))
       await setcheckFriend(
         listFriendRequest.find(
           (item) =>
@@ -185,10 +187,10 @@ export default function ProfileHeader() {
                   ? checkFriend.status === 1
                     ? "Bạn bè"
                     : checkFriend.sender._id === id
-                    ? "Chấp nhận"
-                    : checkFriend.recever._id === detailUser._id
-                    ? "Từ chối"
-                    : "Hủy lời mời"
+                      ? "Chấp nhận"
+                      : checkFriend.recever._id === detailUser._id
+                        ? "Từ chối"
+                        : "Hủy lời mời"
                   : "Thêm bạn bè"}
               </span>
             </p>

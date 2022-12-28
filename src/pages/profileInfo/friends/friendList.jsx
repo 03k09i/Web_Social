@@ -4,6 +4,10 @@ import Cookies from "js-cookie";
 import ItemFriend from "./friendItem/itemFriend";
 import callApi from "../../../utils/callApi";
 
+// import { getSuggestionAction } from "../../store/actions/user.actions"
+// import {}
+// // getListFriendRequestAction
+// // getListFriendAction
 export default function friendList() {
   const dispatch = useDispatch();
   const { detailUser } = useSelector((state) => state.user);
@@ -118,6 +122,7 @@ export default function friendList() {
             </div>
             <div className="content-list-friend grid grid-6-6">
               {showListUser(listUser)}
+
             </div>
           </div>
         </div>
