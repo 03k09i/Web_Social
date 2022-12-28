@@ -4,39 +4,42 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingComponent from "../loading/loading.component";
 import ItemNewsfeed from "./itemNewsfeed/itemNewsfeed.listNews";
-import { getListPostAction } from "../../store/actions/post.actions";
+import {
+  getListPostAction,
+  getListPostUserAction,
+} from "../../store/actions/post.actions";
 
 export default function ListNewsfeed() {
   const dispatch = useDispatch();
   const { listPost } = useSelector((state) => state.post);
   const { id } = useParams();
+  const [listPostUser, setListPostUser] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const token = Cookies.get("token");
+      const token = await Cookies.get("token");
       if (token) {
-        const res = dispatch(getListPostAction());
+        const res = await dispatch(getListPostAction());
+        if (id) {
+          const res1 = await dispatch(getListPostUserAction(id));
+          setListPostUser(res1);
+        }
       }
     };
     fetchData();
   }, []);
+  console.log(listPostUser);
   const showListPost = (listPost) => {
     let result = null;
     if (listPost?.length > 0) {
       result = listPost.map((itemPost, index) => {
-        if (id) {
-          if (itemPost.user._id === id) {
-            return <ItemNewsfeed key={index} itemPost={itemPost} />;
-          }
-        } else {
-          return <ItemNewsfeed key={index} itemPost={itemPost} />;
-        }
+        return <ItemNewsfeed key={index} itemPost={itemPost} />;
       });
     }
     return result;
   };
   return (
     <div className="grid-column">
-      {showListPost(listPost?.post1)}
+      {showListPost(id ? listPostUser?.post1 : listPost?.post1)}
       <LoadingComponent />
     </div>
   );

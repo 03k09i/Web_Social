@@ -86,3 +86,17 @@ export const getListPostAction = (token = Cookies.get("token")) => {
   };
   return add;
 };
+
+export const getListPostUserAction = (id, token = Cookies.get("token")) => {
+  const add = async (dispatch) => {
+    try {
+      const res = await callApi(`post/user/${id}`, "GET", "", {
+        Authorization: `Bearer ${token}`,
+      });
+      return res?.data;
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+};
