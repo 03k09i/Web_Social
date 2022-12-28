@@ -10,8 +10,6 @@ export default function ListNewsfeed() {
   const dispatch = useDispatch();
   const { listPost } = useSelector((state) => state.post);
   const { id } = useParams();
-  // const [listPost, setListPost] = useState();
-  console.log(listPost);
   useEffect(() => {
     const fetchData = async () => {
       const token = Cookies.get("token");
@@ -20,7 +18,7 @@ export default function ListNewsfeed() {
       }
     };
     fetchData();
-  }, [listPost]);
+  }, []);
   const showListPost = (listPost) => {
     let result = null;
     if (listPost?.length > 0) {

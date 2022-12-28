@@ -1,20 +1,45 @@
 import React from "react";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { TiDelete } from "react-icons/ti";
 import {
   postNewsfeedAction,
   getListPostAction,
+  updateNewsfeedAction,
 } from "../../../store/actions/post.actions";
 
-export default function PostNewsfeed() {
+export default function PostNewsfeed(props) {
   const dispatch = useDispatch();
   const { detailUser } = useSelector((state) => state.user);
 
-  const [contentPost, setContentPost] = useState("");
-  const [formUploadFile, setFormUploadFile] = useState(false);
-  const [filePost, setFilePost] = useState([]);
+  const { itemPost } = props;
+  const [contentPost, setContentPost] = useState(itemPost?.content || "");
+  const [formUploadFile, setFormUploadFile] = useState(
+    itemPost?.attachment ? true : false,
+  );
+  const [filePost, setFilePost] = useState(itemPost?.attachment || []);
+  const [file_delete, setFile_delete] = useState([]);
 
+  const deleteImage = async (itemFile, index) => {
+    const temp = filePost.filter((item, id) => id !== index);
+    await setFilePost(temp);
+    await setFile_delete(file_delete.push(itemFile));
+  };
+  const getfile = () => {
+    var input = document.createElement("input");
+    input.type = "file";
+    input.accept = "video/*, image/*";
+    input.multiple = "multiple";
+    input.onchange = (e) => {
+      let element = [];
+      for (let i = 0; i < e.target.files.length; i++) {
+        element.push(e.target.files[i]);
+      }
+      setFilePost([].concat(filePost, element));
+    };
+    input.click();
+  };
   const postNews = () => {
     Swal.fire({
       title: "Wait a minute",
@@ -25,10 +50,22 @@ export default function PostNewsfeed() {
         try {
           let result = new FormData();
           await result.append("content", contentPost);
-          for (let i = 0; i < filePost.length; i++) {
-            await result.append("files", filePost[i]);
+          await result.append("ispublic", true);
+          if (itemPost) {
+            await result.append("file_delete", file_delete);
+            for (let i = 0; i < filePost.length; i++) {
+              if (!filePost[i].link) {
+                console.log(filePost[i]);
+                await result.append("files", filePost[i]);
+              }
+            }
+            await dispatch(updateNewsfeedAction(itemPost._id, result));
+          } else {
+            for (let i = 0; i < filePost.length; i++) {
+              await result.append("files", filePost[i]);
+            }
+            await dispatch(postNewsfeedAction(result));
           }
-          await dispatch(postNewsfeedAction(result));
           await dispatch(getListPostAction());
           setContentPost("");
           setFilePost([]);
@@ -44,16 +81,31 @@ export default function PostNewsfeed() {
     if (filePost?.length > 0) {
       result = filePost.map((itemFile, index) => {
         return (
-          <img
+          <div
             key={index}
-            src={URL.createObjectURL(itemFile)}
             className={
               filePost.length > 4
-                ? "show-list-image-post-5"
-                : `show-list-image-post-${filePost.length}`
+                ? "show-list-image-post-5 show-icon-delete"
+                : `show-list-image-post-${filePost.length} show-icon-delete`
             }
-            alt="#"
-          ></img>
+          >
+            <img
+              src={itemFile?.link || URL.createObjectURL(itemFile)}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: 12,
+              }}
+              alt="#"
+            ></img>
+            <div
+              className="icon-delete-image-post"
+              onClick={() => deleteImage(itemFile, index)}
+            >
+              <TiDelete style={{ width: 30, height: 30 }} />
+            </div>
+          </div>
         );
       });
     }
@@ -115,24 +167,18 @@ export default function PostNewsfeed() {
                     className={
                       filePost?.length > 0 ? "upload-image" : "upload-box"
                     }
+                    onClick={filePost?.length > 0 ? null : getfile}
                     style={{ margin: 15 }}
-                    onClick={() => {
-                      var input = document.createElement("input");
-                      input.type = "file";
-                      input.accept = "video/*, image/*";
-                      input.multiple = "multiple";
-                      input.onchange = (e) => {
-                        let element = [];
-                        for (let i = 0; i < e.target.files.length; i++) {
-                          element.push(e.target.files[i]);
-                        }
-                        setFilePost([].concat(filePost, element));
-                      };
-                      input.click();
-                    }}
                   >
                     {showListImg(filePost)}
-                    {filePost?.length > 0 ? null : (
+                    {filePost?.length > 0 ? (
+                      <svg
+                        className="upload-box-icon icon-photos"
+                        onClick={() => getfile()}
+                      >
+                        <use xlinkHref="#svg-photos" />
+                      </svg>
+                    ) : (
                       <>
                         <svg className="upload-box-icon icon-photos">
                           <use xlinkHref="#svg-photos" />
@@ -192,7 +238,7 @@ export default function PostNewsfeed() {
           {/* <p className="button small void">Discard</p> */}
 
           <p className="button small secondary" onClick={() => postNews()}>
-            Post
+            {itemPost ? "Update" : "Post"}
           </p>
         </div>
       </div>

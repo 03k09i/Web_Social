@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Header from "../../components/header/header";
@@ -31,7 +31,7 @@ export default function Home() {
         <Route path="/profile/:id/*" element={<ProfileInfoPage />} />
         <Route path="/group/*" element={<GroupInfoPage />} />
         <Route path="/message/:idChannel" element={<MessagesPage />} />
-        <Route path="/friend" element={<FriendList/>} />
+        <Route path="/friend" element={<FriendList />} />
       </Routes>
     </div>
   );

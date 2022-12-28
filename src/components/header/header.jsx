@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import FriendHeader from "./friend/friend.header";
 import MessagesHeader from "./messages/messages.header";
 import NotifyHeader from "./notify/notify.header";
@@ -10,7 +11,9 @@ export default function Header() {
     <header className="header">
       <div className="header-actions">
         <div className="header-brand">
-          <h1 className="header-brand-text">CK</h1>
+          <NavLink className="header-brand-text" to={"/"}>
+            CK
+          </NavLink>
         </div>
       </div>
       <SearchHeader />

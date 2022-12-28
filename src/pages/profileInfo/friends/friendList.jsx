@@ -1,52 +1,102 @@
-import { Button } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
+import ItemFriend from "./friendItem/itemFriend";
+import callApi from "../../../utils/callApi";
 
 // import { getSuggestionAction } from "../../store/actions/user.actions"
 // import {}
 // // getListFriendRequestAction
 // // getListFriendAction
 export default function friendList() {
-  //redux
   const dispatch = useDispatch();
-  // state
-  const [indexActive, setIndexActive] = useState(0);
-  const [listSuggestion, setSuggestion] = useState([])
-  const [listFriend, setFriend] = useState([])
-  const [listRequest, setRequest] = useState([])
-  const [listUser, setUser] = useState([])
-
-  const changeActive = async (index) => {
-    await setIndexActive(index)
-  }
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await dispatch(getListChannelAction())
-  //     await setlistChanel(res)
-  //     const res1 = await dispatch(getSuggestionAction())
-  //     await setSuggestion(res1)
-  //   }
-  //   fetchData();
-  // }, [dispatch])
-
+  const { detailUser } = useSelector((state) => state.user);
+  const { listFriendRequest } = useSelector((state) => state.friend);
+  const [status, setStatus] = useState(1);
+  const [listUser, setListUser] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await callApi(`user/getfiend`, "GET", "", {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      });
+      await setListUser(res?.data);
+    };
+    fetchData();
+  }, []);
+  const changeStatus = async (page) => {
+    await setStatus(page);
+    if (page === 1) {
+      const res = await callApi(`user/getfiend`, "GET", "", {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      });
+      await setListUser(res?.data);
+    }
+    if (page === 2) {
+      await setListUser(listFriendRequest);
+    }
+  };
+  const unfriend = async (id) => {
+    const res1 = await callApi(`request/delete/${id}`, "DELETE", "", {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    });
+    const res = await callApi(`user/getfiend`, "GET", "", {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    });
+    await setListUser(res?.data);
+  };
+  console.log(listUser);
+  const showListUser = (listUser) => {
+    let result = null;
+    if (listUser?.length > 0) {
+      if (status === 1) {
+        result = listUser.map((itemUser, index) => {
+          return (
+            <ItemFriend
+              key={index}
+              status={status}
+              itemUser={itemUser}
+              unfriend={unfriend}
+            />
+          );
+        });
+      } else if (status === 2) {
+        result = listUser
+          .filter(
+            (itemUser) =>
+              itemUser?.recever?._id === detailUser?._id &&
+              itemUser?.status === 0,
+          )
+          .map((itemUser, index) => (
+            <ItemFriend key={index} status={status} itemUser={itemUser} />
+          ));
+      }
+    }
+    return result;
+  };
   return (
     <div className="contentFriendPage">
       <div className="grid grid-3-9">
         <div className="grid-column widget-box widget-box-friend">
           <ul className="menu">
             <li className="menu-item">
-              <a className="menu-item-link">Bạn bè</a>
+              <a className="menu-item-link" onClick={() => changeStatus(1)}>
+                Ban be
+              </a>
             </li>
             <li className="menu-item">
-              <a className="menu-item-link">Lời mời kết bạn</a>
+              <a className="menu-item-link" onClick={() => changeStatus(2)}>
+                Loi moi ket ban
+              </a>
             </li>
             <li className="menu-item">
-              <a className="menu-item-link">Gợi ý kết bạn</a>
+              <a className="menu-item-link" onClick={() => changeStatus(3)}>
+                Goi y ket ban
+              </a>
             </li>
             <li className="menu-item">
-              <a className="menu-item-link">Tìm bạn bè mới</a>
+              <a className="menu-item-link" onClick={() => changeStatus(4)}>
+                Tim ban be moi
+              </a>
             </li>
           </ul>
         </div>
@@ -71,184 +121,8 @@ export default function friendList() {
               </div>
             </div>
             <div className="content-list-friend grid grid-6-6">
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend">
-                  <div className=" img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className=" info-friend">
-                    <div className="content-info-friend">
-                      <p>Cong Tan</p>
-                      <p>congtan@gmail.com</p>
-                      <p>Nam</p>
-                      <p>0963626559</p>
-                    </div>
-                  </div>
-                  <div className=" status-friend">
-                    <Button variant="contained">Accept</Button>
-                    <Button variant="outlined">Reject</Button>
-                  </div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
-              <div className="grid-column">
-                <div className="item-friend grid grid-3-6-3">
-                  <div className="grid-column img-friend">
-                    <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png" />
-                  </div>
-                  <div className="grid-column info-friend">
-                    <div className="content-info-friend">
-                      <div className="name-info-friend">
-                        <p>Cong Tan</p>
-                        <p>congtan@gmail.com</p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div className="grid-column status-friend">h3</div>
-                </div></div>
+              {showListUser(listUser)}
+
             </div>
           </div>
         </div>

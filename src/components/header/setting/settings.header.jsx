@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setInfoUser } from "../../../store/reducers/user.reducer";
 import ClickOutside from "../../clickOutside/clickOutside.component";
@@ -68,13 +68,16 @@ export default function SettingsHeader() {
             </div>
           </div>
 
-          {/* <p className="dropdown-navigation-category">My Profile</p>
+          <p className="dropdown-navigation-category">My Profile</p>
 
-          <a className="dropdown-navigation-link" href="hub-profile-info.html">
+          <NavLink
+            className="dropdown-navigation-link"
+            to={`/profile/${detailUser._id}`}
+          >
             Profile Info
-          </a>
+          </NavLink>
 
-          <a
+          {/* <a
             className="dropdown-navigation-link"
             href="hub-profile-social.html"
           >
