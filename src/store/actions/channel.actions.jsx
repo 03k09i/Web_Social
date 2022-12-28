@@ -23,7 +23,7 @@ export const getListChannelAction = (token = Cookies.get("token")) => {
         Authorization: `Bearer ${token}`,
       });
       await dispatch(getListChannel(res.data));
-      return res?.data?.data;
+      return res?.data;
     } catch (err) {
       return err;
     }

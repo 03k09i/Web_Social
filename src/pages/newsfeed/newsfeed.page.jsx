@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import ListNewsfeed from "../../components/listNewsfeed/listNewsfeed.component";
 import SidebarOnHeader from "../../components/sidebar/sidebarOn";
 import PostNewsfeed from "./postNewsfeed/postNewsfeed.newsfeed";
+import {
+  getChannelAction,
+  getListChannelAction,
+} from "../../store/actions/channel.actions";
+import { getSuggestionAction } from "../../store/actions/user.actions"
 
 export default function NewsfeedPage() {
+
+  //redux
+  const dispatch = useDispatch();
+  // state
+  const [listChanel, setlistChanel] = useState([]);
+  const [listSuggestion, setSuggestion] = useState([])
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await dispatch(getListChannelAction())
+      await setlistChanel(res)
+      const res1 = await dispatch(getSuggestionAction())
+      await setSuggestion(res1)
+    }
+    fetchData();
+  }, [dispatch])
+
+
   return (
     <div className="content-grid">
       <div
@@ -11,63 +37,6 @@ export default function NewsfeedPage() {
         style={{ marginTop: 0 }}
       >
         <div className="grid-column">
-          {/* <div className="widget-box">
-            <div className="widget-box-settings">
-              <div className="post-settings-wrap">
-                <div className="post-settings widget-box-post-settings-dropdown-trigger">
-                  <svg className="post-settings-icon icon-more-dots">
-                    <use xlinkHref="#svg-more-dots" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <p className="widget-box-title">Members</p>
-
-            <div className="widget-box-content">
-              <div className="filters">
-                <p className="filter">Newest</p>
-
-                <p className="filter active">Popular</p>
-
-                <p className="filter">Active</p>
-              </div>
-
-              <div className="user-status-list">
-                <div className="user-status request-small">
-                  <a
-                    className="user-status-avatar"
-                    href="profile-timeline.html"
-                  >
-                    <div className="user-avatar small no-outline">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-30-32"
-                          data-src="img/avatar/07.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="profile-timeline.html">
-                      Sarah Diamond
-                    </a>
-                  </p>
-
-                  <p className="user-status-text small">24.5K profile views</p>
-
-                  <div className="action-request-list">
-                    <div className="action-request accept">
-                      <svg className="action-request-icon icon-add-friend">
-                        <use xlinkHref="#svg-add-friend" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
           <SidebarOnHeader />
         </div>
         <div className="grid-column">
@@ -75,335 +44,94 @@ export default function NewsfeedPage() {
           <ListNewsfeed />
         </div>
         <div className="grid-column">
-          <div style={{width:"400px"}}><div className="widget-box">
+          <div style={{ width: "400px" }}><div className="widget-box">
             <div className="widget-box-settings">
               <div className="post-settings-wrap">
-                <div className="post-settings widget-box-post-settings-dropdown-trigger">
-                  <svg className="post-settings-icon icon-more-dots">
-                    <use xlinkHref="#svg-more-dots" />
-                  </svg>
-                </div>
+
               </div>
             </div>
 
-            <p className="widget-box-title">Lien he</p>
+            <p className="widget-box-title">Liên Hệ</p>
 
-            <div className="widget-box-content">
+            <div className="widget-box-content" style={{ "minHeight": "300px" }}>
               <div className="user-status-list">
-                <div className="user-status">
-                  <a
-                    className="user-status-avatar"
-                    href="profile-timeline.html"
-                  >
-                    <div className="user-avatar small no-outline">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-30-32"
-                          data-src="img/avatar/05.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
 
-                  <p className="user-status-title">
-                    <a className="bold" href="profile-timeline.html">
-                      Neko Bebop
-                    </a>{" "}
-                    commented on Destroy Dex's{" "}
-                    <a className="highlighted" href="profile-timeline.html">
-                      photo
-                    </a>
-                  </p>
+                {listChanel.map((itemChannel, index) => {
+                  if (index < 5) {
+                    return (<div key={index} className="user-status" >
+                      <NavLink style={{ display: "flex", alignItems: "center" }}
+                        className="user-status-avatar"
+                        to={`/message/${itemChannel._id}`}
+                      >
+                        <div className="user-avatar small no-outline">
+                          <div className="user-avatar-content" >
+                            <img
+                              className="image-avatar-40"
+                              src={
+                                itemChannel?.avatar ||
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+                              }
+                              alt="error"
+                            />
+                          </div>
+                        </div>
 
-                  <p className="user-status-timestamp">3 minutes ago</p>
-                </div>
 
-                <div className="user-status">
-                  <a
-                    className="user-status-avatar"
-                    href="profile-timeline.html"
-                  >
-                    <div className="user-avatar small no-outline">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-30-32"
-                          data-src="img/avatar/03.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="profile-timeline.html">
-                      Nick Grissom
-                    </a>{" "}
-                    liked Marina Valentine's{" "}
-                    <a className="highlighted" href="profile-timeline.html">
-                      status update
-                    </a>
-                  </p>
-
-                  <p className="user-status-timestamp">12 minutes ago</p>
-                </div>
-
-                <div className="user-status">
-                  <a
-                    className="user-status-avatar"
-                    href="profile-timeline.html"
-                  >
-                    <div className="user-avatar small no-outline">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-30-32"
-                          data-src="img/avatar/10.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="profile-timeline.html">
-                      The Green Goo
-                    </a>{" "}
-                    liked Nick Grissom's{" "}
-                    <a className="highlighted" href="profile-timeline.html">
-                      video
-                    </a>
-                  </p>
-
-                  <p className="user-status-timestamp">17 minutes ago</p>
-                </div>
-
-                <div className="user-status">
-                  <a
-                    className="user-status-avatar"
-                    href="profile-timeline.html"
-                  >
-                    <div className="user-avatar small no-outline">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-30-32"
-                          data-src="img/avatar/03.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="profile-timeline.html">
-                      Nick Grissom
-                    </a>{" "}
-                    changed his{" "}
-                    <a className="highlighted" href="profile-timeline.html">
-                      profile picture
-                    </a>
-                  </p>
-
-                  <p className="user-status-timestamp">33 minutes ago</p>
-                </div>
-
-                <div className="user-status">
-                  <a
-                    className="user-status-avatar"
-                    href="profile-timeline.html"
-                  >
-                    <div className="user-avatar small no-outline">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-30-32"
-                          data-src="img/avatar/02.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="profile-timeline.html">
-                      Destroy Dex
-                    </a>{" "}
-                    commented on Rosie Sakura's{" "}
-                    <a className="highlighted" href="profile-timeline.html">
-                      profile
-                    </a>
-                  </p>
-
-                  <p className="user-status-timestamp">41 minutes ago</p>
-                </div>
+                        <p className="user-status-title" style={{ marginLeft: "15px" }} >
+                          <a className="bold" href="profile-timeline.html">
+                            {itemChannel?.name}
+                          </a>
+                        </p>
+                      </NavLink>
+                    </div>)
+                  }
+                })}
               </div>
             </div>
           </div>
 
-          <div className="widget-box">
-            <div className="widget-box-settings">
-              <div className="post-settings-wrap">
-                <div className="post-settings widget-box-post-settings-dropdown-trigger">
-                  <svg className="post-settings-icon icon-more-dots">
-                    <use xlinkHref="#svg-more-dots" />
-                  </svg>
+            <div className="widget-box" style={{ marginTop: "15px" }}>
+              <div className="widget-box-settings">
+                <div className="post-settings-wrap">
                 </div>
               </div>
-            </div>
 
-            <p className="widget-box-title">Groups</p>
+              <p className="widget-box-title">Gợi ý kết bạn </p>
 
-            <div className="widget-box-content">
-              <div className="filters">
-                <p className="filter">Newest</p>
+              <div className="widget-box-content" style={{ "minHeight": "300px" }}>
+                <div className="user-status-list" style={{ "marginLeft": "5px" }}>
+                  {listSuggestion.map((itemSuggestion, index) => (
+                    <div key={index} className="user-status" >
+                      <NavLink style={{ display: "flex", alignItems: "center" }}
+                        className="user-status-avatar"
+                        to={`/profile/${itemSuggestion._id}`}
+                      >
+                        <div className="user-avatar small no-outline">
+                          <div className="user-avatar-content" >
+                            <img
+                              className="image-avatar-40"
+                              src={
+                                itemSuggestion?.avatar?.link ||
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsIF-ADKJNVFO7YMDeeSGCQzbpd49voN4FnMqdoH-Hlx38FzOlHjYbeVug3RKFfrAfnOU&usqp=CAU"
+                              }
+                              alt="error"
+                            />
+                          </div>
+                        </div>
 
-                <p className="filter active">Popular</p>
 
-                <p className="filter">Active</p>
-              </div>
-
-              <div className="user-status-list">
-                <div className="user-status request-small">
-                  <a className="user-status-avatar" href="group-timeline.html">
-                    <div className="user-avatar small no-border">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-40-44"
-                          data-src="img/avatar/29.jpg"
-                        />
-                      </div>
+                        <p className="user-status-title" style={{ marginLeft: "15px" }} >
+                          <a className="bold" href="profile-timeline.html">
+                            {itemSuggestion?.name}
+                          </a>
+                        </p>
+                      </NavLink>
                     </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="group-timeline.html">
-                      Twitch Streamers
-                    </a>
-                  </p>
-
-                  <p className="user-status-text small">265 members</p>
-
-                  <div className="action-request-list">
-                    <div className="action-request accept">
-                      <svg className="action-request-icon icon-join-group">
-                        <use xlinkHref="#svg-join-group" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="user-status request-small">
-                  <a className="user-status-avatar" href="group-timeline.html">
-                    <div className="user-avatar small no-border">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-40-44"
-                          data-src="img/avatar/24.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="group-timeline.html">
-                      Cosplayers of the World
-                    </a>
-                  </p>
-
-                  <p className="user-status-text small">139 members</p>
-
-                  <div className="action-request-list">
-                    <div className="action-request accept">
-                      <svg className="action-request-icon icon-join-group">
-                        <use xlinkHref="#svg-join-group" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="user-status request-small">
-                  <a className="user-status-avatar" href="group-timeline.html">
-                    <div className="user-avatar small no-border">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-40-44"
-                          data-src="img/avatar/25.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="group-timeline.html">
-                      Stream Designers
-                    </a>
-                  </p>
-
-                  <p className="user-status-text small">466 members</p>
-
-                  <div className="action-request-list">
-                    <div className="action-request accept">
-                      <svg className="action-request-icon icon-join-group">
-                        <use xlinkHref="#svg-join-group" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="user-status request-small">
-                  <a className="user-status-avatar" href="group-timeline.html">
-                    <div className="user-avatar small no-border">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-40-44"
-                          data-src="img/avatar/28.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="group-timeline.html">
-                      Street Artists
-                    </a>
-                  </p>
-
-                  <p className="user-status-text small">951 members</p>
-
-                  <div className="action-request-list">
-                    <div className="action-request decline">
-                      <svg className="action-request-icon icon-leave-group">
-                        <use xlinkHref="#svg-leave-group" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="user-status request-small">
-                  <a className="user-status-avatar" href="group-timeline.html">
-                    <div className="user-avatar small no-border">
-                      <div className="user-avatar-content">
-                        <div
-                          className="hexagon-image-40-44"
-                          data-src="img/avatar/27.jpg"
-                        />
-                      </div>
-                    </div>
-                  </a>
-
-                  <p className="user-status-title">
-                    <a className="bold" href="group-timeline.html">
-                      Gaming Watchtower
-                    </a>
-                  </p>
-
-                  <p className="user-status-text small">2.365 members</p>
-
-                  <div className="action-request-list">
-                    <div className="action-request accept">
-                      <svg className="action-request-icon icon-join-group">
-                        <use xlinkHref="#svg-join-group" />
-                      </svg>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            </div>
-          </div></div>
-          
+            </div></div>
+
         </div>
       </div>
     </div>
