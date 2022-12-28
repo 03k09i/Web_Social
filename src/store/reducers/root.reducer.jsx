@@ -6,6 +6,8 @@ import PopupNewsfeedReducer from "./popupNewsfeed.reducer";
 import PostReducer from "./post.reducer";
 import SocketReducer from "./socket.reducer";
 import UserReducer from "./user.reducer";
+import savepostReducer from "./savepost.reducer";
+import shortcutReducer from "./shortcut.reducer";
 
 export default configureStore({
   reducer: {
@@ -16,6 +18,8 @@ export default configureStore({
     channel: ChannelReducer,
     post: PostReducer,
     notify: NotifyReducer,
+    savepost:savepostReducer,
+    shortcut:shortcutReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

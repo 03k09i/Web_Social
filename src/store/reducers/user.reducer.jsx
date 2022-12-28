@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   detailUser: "",
   checkLogin: 1,
+  listSuggestion: []
 };
 
 export const UserReducer = createSlice({
@@ -20,9 +21,12 @@ export const UserReducer = createSlice({
     setCheckLogin: (state, action) => {
       state.checkLogin = action.payload;
     },
+    setSuggestion: (state, action) => {
+      state.listSuggestion = action.payload
+    }
   },
 });
 
-export const { setInfoUser, setCheckLogin } = UserReducer.actions;
+export const { setInfoUser, setCheckLogin, setSuggestion } = UserReducer.actions;
 
 export default UserReducer.reducer;

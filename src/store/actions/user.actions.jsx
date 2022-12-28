@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import callApi from "../../utils/callApi";
-import { setInfoUser } from "../reducers/user.reducer";
+import { setInfoUser, setSuggestion } from "../reducers/user.reducer";
 import { checkError } from "./showAlert.actions";
 
 export const loginUserAction = (data) => {
@@ -129,3 +129,19 @@ export const getInfoFriendAction = (id, token = Cookies.get("token")) => {
   };
   return add;
 };
+
+export const getSuggestionAction = (token = Cookies.get("token")) => {
+  const add = async (dispatch) => {
+    try {
+      const res = await callApi(`user/suggestion?num=5`, "GET", "", {
+        Authorization: `Bearer ${token}`,
+      });
+      await dispatch(setSuggestion(res.data.user1));
+      return res?.data?.user1;
+
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+}
