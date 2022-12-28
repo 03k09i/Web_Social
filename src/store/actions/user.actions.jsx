@@ -36,7 +36,7 @@ export const registerUserAction = (data) => {
 export const resetPasswordAction = (data) => {
   const add = async (dispatch) => {
     try {
-      console.log(data)
+      console.log(data);
       const res = await callApi(`auth/resetpass`, "POST", data);
       return res;
     } catch (err) {
