@@ -32,7 +32,6 @@ export default function SetupItemNewsfeed(props) {
   const open1 = Boolean(setupPost);
   const id1 = open1 ? "simple-popper" : undefined;
 
-  console.log(itemPost);
   const deletePost = async () => {
     if (itemPost.user._id === detailUser._id) {
       await dispatch(deleteNewsfeedAction(itemPost._id));
