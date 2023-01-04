@@ -18,6 +18,7 @@ import { getListChannelAction } from "./store/actions/channel.actions";
 import { setSocket } from "./store/reducers/socket.reducer";
 import { setCheckLogin } from "./store/reducers/user.reducer";
 import { getNotifyAction } from "./store/actions/notify.actions";
+import { getListPostAction } from "./store/actions/post.actions";
 import Swal from "sweetalert2";
 
 AOS.init({ duration: 900 });
@@ -62,6 +63,7 @@ function App() {
               title: "Có thông báo đến bạn",
             });
             await dispatch(getNotifyAction());
+            await dispatch(getListPostAction());
           });
           socket.on("likecommentclient", async (data) => {
             Toast.fire({
@@ -69,6 +71,7 @@ function App() {
               title: "Có thông báo đến bạn",
             });
             await dispatch(getNotifyAction());
+            await dispatch(getListPostAction());
           });
           socket.on("commentpostclient", async (data) => {
             Toast.fire({
@@ -76,6 +79,7 @@ function App() {
               title: "Có thông báo đến bạn",
             });
             await dispatch(getNotifyAction());
+            await dispatch(getListPostAction());
           });
           socket.on("replycommentpostclient", async (data) => {
             Toast.fire({
@@ -83,6 +87,7 @@ function App() {
               title: "Có thông báo đến bạn",
             });
             await dispatch(getNotifyAction());
+            await dispatch(getListPostAction());
           });
           socket.on("sendfriendrequestclient", async (data) => {
             await dispatch(getListFriendRequestAction());

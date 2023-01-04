@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 
 export const checkError = (res) => {
   if (res?.data?.message) {
-    console.log(res.data.message)
     Swal.fire({
       icon: "success",
       title: res.data.message,
@@ -17,8 +16,7 @@ export const checkError = (res) => {
         showConfirmButton: false,
         timer: 1500,
       });
-    }
-    else {
+    } else {
       Swal.fire({
         icon: "error",
         title: res.message,

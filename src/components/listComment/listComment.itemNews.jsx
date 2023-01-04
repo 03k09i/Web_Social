@@ -47,6 +47,7 @@ export default function ListCommentItemNewsfeed(props) {
         itemPost={itemPost}
         listComment={listComment}
         setListComment={setListComment}
+        setQuantityComment={setQuantityComment}
       />
     </div>
   ) : null;

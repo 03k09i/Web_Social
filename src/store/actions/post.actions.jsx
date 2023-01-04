@@ -62,7 +62,6 @@ export const publicNewsfeedAction = (
       const res = await callApi(`post/public/${id}`, "PATCH", data, {
         Authorization: `Bearer ${token}`,
       });
-      console.log(res);
       await dispatch(checkError(res));
       return res;
     } catch (err) {

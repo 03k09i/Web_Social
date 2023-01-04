@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FriendItem from "./friendItem/friendItem.friends";
-import {getListFriendUserAction} from "../../../store/actions/friend.actions"
+import { getListFriendUserAction } from "../../../store/actions/friend.actions";
 
 export default function FriendsProfile() {
   const { listFriend } = useSelector((state) => state.friend);
-  const {id}=useParams()
+  const { id } = useParams();
   //redux
   const dispatch = useDispatch();
   // state
@@ -14,12 +14,11 @@ export default function FriendsProfile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await dispatch(getListFriendUserAction(id))
-      await setlistFriendUser(res)
-    }
+      const res = await dispatch(getListFriendUserAction(id));
+      await setlistFriendUser(res);
+    };
     fetchData();
-  }, [dispatch])
-  console.log(listFriendUser)
+  }, [dispatch]);
 
   const showListFriend = (listFriend) => {
     let result = null;
@@ -91,7 +90,6 @@ export default function FriendsProfile() {
           </div>
         </div>
       </div> */}
-      {console.log(listFriendUser,"-----------------")}
       <div className="grid grid-3-3-3-3 centered">
         {showListFriend(listFriendUser)}
       </div>

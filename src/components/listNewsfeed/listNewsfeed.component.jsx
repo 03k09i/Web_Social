@@ -27,7 +27,7 @@ export default function ListNewsfeed() {
     };
     fetchData();
   }, []);
-  console.log(listPostUser);
+
   const showListPost = (listPost) => {
     let result = null;
     if (listPost?.length > 0) {

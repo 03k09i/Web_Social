@@ -11,7 +11,7 @@ export default function ReplyComment(props) {
   const dispatch = useDispatch();
   const { detailUser } = useSelector((state) => state.user);
   const { socket } = useSelector((state) => state.socket);
-  const { itemComment, itemPost, setListComment } = props;
+  const { itemComment, itemPost, setListComment, setQuantityComment } = props;
   const [focusInput, setFocusInput] = useState();
   const [commentContent, setCommentContent] = useState();
 
@@ -25,6 +25,7 @@ export default function ReplyComment(props) {
     const res = await dispatch(getListCommentAction(itemPost._id));
     await dispatch(getListPostAction());
     await setListComment(res?.comment);
+    await setQuantityComment(res?.comment?.length);
     await setCommentContent("");
     if (detailUser._id !== itemPost.user._id) {
       await dispatch(

@@ -13,7 +13,7 @@ export default function PostNewsfeed(props) {
   const dispatch = useDispatch();
   const { detailUser } = useSelector((state) => state.user);
 
-  const { itemPost } = props;
+  const { itemPost, setOpen } = props;
   const [contentPost, setContentPost] = useState(itemPost?.content || "");
   const [formUploadFile, setFormUploadFile] = useState(
     itemPost?.attachment ? true : false,
@@ -22,13 +22,11 @@ export default function PostNewsfeed(props) {
   let [file_delete, setFile_delete] = useState([]);
 
   const deleteImage = async (itemFile, index) => {
-    console.log(itemFile)
     const temp = filePost.filter((item, id) => id !== index);
     await setFilePost(temp);
-    let del=Array.from(file_delete)
-    await del.push(itemFile)
+    let del = Array.from(file_delete);
+    await del.push(itemFile);
     await setFile_delete(del);
-    
   };
   const getfile = () => {
     var input = document.createElement("input");
@@ -51,33 +49,31 @@ export default function PostNewsfeed(props) {
       allowOutsideClick: false,
       didOpen: async () => {
         Swal.showLoading();
-        try {
-          let result = new FormData();
-          await result.append("content", contentPost);
-          await result.append("ispublic", true);
-          if (itemPost) {
-            await result.append("file_delete", file_delete);
-            for (let i = 0; i < filePost.length; i++) {
-              if (!filePost[i].link) {
-                console.log(filePost[i]);
-                await result.append("files", filePost[i]);
-              }
-            }
-            await dispatch(updateNewsfeedAction(itemPost._id, result));
-          } else {
-            for (let i = 0; i < filePost.length; i++) {
+        let result = new FormData();
+        await result.append("content", contentPost);
+        await result.append("ispublic", true);
+        if (itemPost) {
+          await result.append("file_delete", file_delete);
+          for (let i = 0; i < filePost.length; i++) {
+            if (!filePost[i].link) {
               await result.append("files", filePost[i]);
             }
-            await dispatch(postNewsfeedAction(result));
           }
-          await dispatch(getListPostAction());
-          setContentPost("");
-          setFilePost([]);
-        } catch (error) {
-          Swal.fire("ERROR", error, "error");
+          await dispatch(updateNewsfeedAction(itemPost._id, result));
+        } else {
+          for (let i = 0; i < filePost.length; i++) {
+            await result.append("files", filePost[i]);
+          }
+          await dispatch(postNewsfeedAction(result));
         }
+        setTimeout(() => {
+          dispatch(getListPostAction());
+        }, 3000);
+        setContentPost("");
+        setFilePost([]);
       },
     });
+    setOpen(false);
   };
 
   const showListImg = (filePost) => {

@@ -1,6 +1,10 @@
 import Cookies from "js-cookie";
 import callApi from "../../utils/callApi";
-import { setInfoUser, setSuggestion,setAllUser } from "../reducers/user.reducer";
+import {
+  setInfoUser,
+  setSuggestion,
+  setAllUser,
+} from "../reducers/user.reducer";
 import { checkError } from "./showAlert.actions";
 
 export const loginUserAction = (data) => {
@@ -36,7 +40,6 @@ export const registerUserAction = (data) => {
 export const resetPasswordAction = (data) => {
   const add = async (dispatch) => {
     try {
-      console.log(data);
       const res = await callApi(`auth/resetpass`, "POST", data);
       return res;
     } catch (err) {
@@ -53,9 +56,10 @@ export const updateUserAction = (data, token = Cookies.get("token")) => {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       });
-      console.log(res?.data);
       if (res?.data?.message) {
-        await dispatch(getInfoUserAction());
+        setTimeout(() => {
+          dispatch(getInfoUserAction());
+        }, 2000);
       }
       await dispatch(checkError(res));
       return res;
@@ -87,6 +91,7 @@ export const getInfoUserAction = (token = Cookies.get("token")) => {
       const res = await callApi(`user/getinfo`, "GET", "", {
         Authorization: `Bearer ${token}`,
       });
+      console.log(res.data);
       if (res?.data) {
         await dispatch(setInfoUser(res.data.data));
       } else {
@@ -138,15 +143,14 @@ export const getSuggestionAction = (token = Cookies.get("token")) => {
       });
       await dispatch(setSuggestion(res.data.user1));
       return res?.data?.user1;
-
     } catch (err) {
       return err;
     }
   };
   return add;
-}
+};
 
-export const getAllUserAction=(token = Cookies.get("token"))=>{
+export const getAllUserAction = (token = Cookies.get("token")) => {
   const add = async (dispatch) => {
     try {
       const res = await callApi(`user/not/friend`, "GET", "", {
@@ -154,10 +158,9 @@ export const getAllUserAction=(token = Cookies.get("token"))=>{
       });
       await dispatch(setAllUser(res.data.user));
       return res?.data?.user;
-
     } catch (err) {
       return err;
     }
   };
   return add;
-}
+};

@@ -14,12 +14,11 @@ export default function ItemPhoto(props) {
       style={{ zIndex: 0 }}
       onClick={openPopup}
     >
-      <figure className="photo-preview-image liquid">
-        <img
-          src={itemImg?.link || "/img/landing/mylove2.jpg"}
-          alt="photo-preview-01"
-        />
-      </figure>
+      {itemImg?.link ? (
+        <figure className="photo-preview-image liquid">
+          <img src={itemImg?.link} alt="photo-preview-01" />
+        </figure>
+      ) : null}
 
       <div className="photo-preview-info">
         <div className="reaction-count-list">

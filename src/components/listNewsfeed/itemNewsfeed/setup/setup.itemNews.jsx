@@ -58,15 +58,16 @@ export default function SetupItemNewsfeed(props) {
   };
   const checkMyPost = () => {
     if (itemPost?.user?._id == detailUser._id) {
-      return true
+      return true;
+    } else {
+      return false;
     }
-    else {
-      return false
-    }
-  }
+  };
   return (
-
-    <div className="widget-box-settings" style={checkMyPost() == true ? { display: "block" } : { display: "none" }}>
+    <div
+      className="widget-box-settings"
+      style={checkMyPost() == true ? { display: "block" } : { display: "none" }}
+    >
       <div
         className="post-settings-wrap"
         onClick={(e) => setSetupPost(setupPost ? false : e.currentTarget)}
@@ -107,7 +108,7 @@ export default function SetupItemNewsfeed(props) {
         sty
       >
         <Box sx={style}>
-          <PostNewsfeed itemPost={itemPost} />
+          <PostNewsfeed itemPost={itemPost} setOpen={setOpen} />
         </Box>
       </Modal>
     </div>

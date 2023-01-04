@@ -29,8 +29,13 @@ export default function PictureItemNews(props) {
             <ItemPhoto itemImg={listImg?.[3]} />
           </div>
         ) : null}
-
         {listImg?.[4] ? (
+          <div className="picture-collage-item popup-picture-trigger">
+            <ItemPhoto itemImg={listImg?.[4]} />
+          </div>
+        ) : null}
+
+        {/* {listImg?.[4] ? (
           <div className="picture-collage-item">
             <a
               className="picture-collage-item-overlay"
@@ -40,7 +45,7 @@ export default function PictureItemNews(props) {
             </a>
             <ItemPhoto itemImg={listImg?.[4]} />
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );
