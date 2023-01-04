@@ -3,6 +3,7 @@ import callApi from "../../utils/callApi";
 import {
   getListFriend,
   getListFriendRequest,
+  getListFriendUser
 } from "../reducers/friend.reducer";
 import { checkError } from "./showAlert.actions";
 
@@ -33,6 +34,23 @@ export const getListFriendAction = (token = Cookies.get("token")) => {
         await dispatch(getListFriend(res.data));
       }
       return res;
+    } catch (err) {
+      return err;
+    }
+  };
+  return add;
+};
+
+export const getListFriendUserAction = (id,token = Cookies.get("token")) => {
+  const add = async (dispatch) => {
+    try {
+      const res = await callApi(`user/getfiend/${id}`, "GET", "", {
+        Authorization: `Bearer ${token}`,
+      });
+      if (res?.data) {
+        await dispatch(getListFriendUser(res.data));
+      }
+      return res.data;
     } catch (err) {
       return err;
     }

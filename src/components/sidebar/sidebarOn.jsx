@@ -30,7 +30,7 @@ export default function SidebarOnHeader() {
     >
       <ul className="menu menu1">
         <li className="menu-item">
-          <a className="menu-item-link menu-item-rela" href="newsfeed.html">
+          <NavLink className="menu-item-link menu-item-rela" to={`/profile/${detailUser._id}`}>
             <div className="menu-item-link-icon icon-overview">
               <img
                 className="image-avatar-40" style={{ marginTop: "-30px", marginLeft: "-2px" }}
@@ -42,7 +42,7 @@ export default function SidebarOnHeader() {
               />
             </div>
             {detailUser.name}
-          </a>
+          </NavLink>
         </li>
       </ul>
 

@@ -3,26 +3,31 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import ItemFriend from "./friendItem/itemFriend";
 import callApi from "../../../utils/callApi";
+import { getSuggestionAction, getAllUserAction } from "../../../store/actions/user.actions"
 
-// import { getSuggestionAction } from "../../store/actions/user.actions"
-// import {}
-// // getListFriendRequestAction
-// // getListFriendAction
+
 export default function friendList() {
   const dispatch = useDispatch();
   const { detailUser } = useSelector((state) => state.user);
   const { listFriendRequest } = useSelector((state) => state.friend);
   const [status, setStatus] = useState(1);
   const [listUser, setListUser] = useState([]);
+  const [listSuggestion, setListSuggestion] = useState([])
+  const [listAllUser, setListAllUser] = useState([])
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await callApi(`user/getfiend`, "GET", "", {
         Authorization: `Bearer ${Cookies.get("token")}`,
       });
       await setListUser(res?.data);
+      const res1 = await dispatch(getSuggestionAction());
+      await setListSuggestion(res1)
+      const res2 = await dispatch(getAllUserAction())
+      await setListAllUser(res2);
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
   const changeStatus = async (page) => {
     await setStatus(page);
     if (page === 1) {
@@ -44,7 +49,6 @@ export default function friendList() {
     });
     await setListUser(res?.data);
   };
-  console.log(listUser);
   const showListUser = (listUser) => {
     let result = null;
     if (listUser?.length > 0) {
@@ -69,6 +73,12 @@ export default function friendList() {
           .map((itemUser, index) => (
             <ItemFriend key={index} status={status} itemUser={itemUser} />
           ));
+      } else if (status === 3) {
+        result = listUser.map((itemUser, index) => (
+            <ItemFriend key={index} status={status} itemUser={itemUser}/>
+          ));
+      } else if (status === 4) {
+
       }
     }
     return result;
@@ -80,22 +90,22 @@ export default function friendList() {
           <ul className="menu">
             <li className="menu-item">
               <a className="menu-item-link" onClick={() => changeStatus(1)}>
-                Ban be
+                Bạn bè
               </a>
             </li>
             <li className="menu-item">
               <a className="menu-item-link" onClick={() => changeStatus(2)}>
-                Loi moi ket ban
+                Lời mời kết bạn
               </a>
             </li>
             <li className="menu-item">
               <a className="menu-item-link" onClick={() => changeStatus(3)}>
-                Goi y ket ban
+                Gợi ý kết bạn
               </a>
             </li>
             <li className="menu-item">
               <a className="menu-item-link" onClick={() => changeStatus(4)}>
-                Tim ban be moi
+                Tìm bạn bè mới
               </a>
             </li>
           </ul>

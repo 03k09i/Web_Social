@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ItemPhoto from "../../../components/itemPhoto/itemPhoto.component";
 import { getImageUserAction } from "../../../store/actions/user.actions";
+import { useParams } from "react-router-dom";
 
 export default function PhotosProfile() {
   const dispatch = useDispatch();
   const { detailUser } = useSelector((state) => state.user);
-
+  const { id } = useParams();
   const [listImage, setListImage] = useState();
   useEffect(() => {
     const fetchData = async () => {
-      const res = await dispatch(getImageUserAction(detailUser._id));
+      const res = await dispatch(getImageUserAction(id));
       await setListImage(res.list_Image);
     };
     fetchData();

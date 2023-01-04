@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   detailUser: "",
   checkLogin: 1,
-  listSuggestion: []
+  listSuggestion: [],
+  listAllUser: []
 };
 
 export const UserReducer = createSlice({
@@ -23,10 +24,13 @@ export const UserReducer = createSlice({
     },
     setSuggestion: (state, action) => {
       state.listSuggestion = action.payload
+    },
+    setAllUser: (state, action) => {
+      state.listAllUser = action.payload
     }
   },
 });
 
-export const { setInfoUser, setCheckLogin, setSuggestion } = UserReducer.actions;
+export const { setInfoUser, setCheckLogin, setSuggestion, setAllUser } = UserReducer.actions;
 
 export default UserReducer.reducer;

@@ -19,12 +19,16 @@ export default function PostNewsfeed(props) {
     itemPost?.attachment ? true : false,
   );
   const [filePost, setFilePost] = useState(itemPost?.attachment || []);
-  const [file_delete, setFile_delete] = useState([]);
+  let [file_delete, setFile_delete] = useState([]);
 
   const deleteImage = async (itemFile, index) => {
+    console.log(itemFile)
     const temp = filePost.filter((item, id) => id !== index);
     await setFilePost(temp);
-    await setFile_delete(file_delete.push(itemFile));
+    let del=Array.from(file_delete)
+    await del.push(itemFile)
+    await setFile_delete(del);
+    
   };
   const getfile = () => {
     var input = document.createElement("input");
@@ -101,7 +105,7 @@ export default function PostNewsfeed(props) {
             ></img>
             <div
               className="icon-delete-image-post"
-              onClick={() => deleteImage(itemFile, index)}
+              onClick={() => deleteImage(itemFile._id, index)}
             >
               <TiDelete style={{ width: 30, height: 30 }} />
             </div>

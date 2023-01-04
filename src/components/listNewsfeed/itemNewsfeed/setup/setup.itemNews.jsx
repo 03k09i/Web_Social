@@ -56,8 +56,17 @@ export default function SetupItemNewsfeed(props) {
       );
     }
   };
+  const checkMyPost = () => {
+    if (itemPost?.user?._id == detailUser._id) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
   return (
-    <div className="widget-box-settings">
+
+    <div className="widget-box-settings" style={checkMyPost() == true ? { display: "block" } : { display: "none" }}>
       <div
         className="post-settings-wrap"
         onClick={(e) => setSetupPost(setupPost ? false : e.currentTarget)}

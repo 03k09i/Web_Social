@@ -1,8 +1,26 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import FriendItem from "./friendItem/friendItem.friends";
+import {getListFriendUserAction} from "../../../store/actions/friend.actions"
+
 export default function FriendsProfile() {
   const { listFriend } = useSelector((state) => state.friend);
+  const {id}=useParams()
+  //redux
+  const dispatch = useDispatch();
+  // state
+  const [listFriendUser, setlistFriendUser] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await dispatch(getListFriendUserAction(id))
+      await setlistFriendUser(res)
+    }
+    fetchData();
+  }, [dispatch])
+  console.log(listFriendUser)
+
   const showListFriend = (listFriend) => {
     let result = null;
     if (listFriend?.length > 0) {
@@ -20,8 +38,8 @@ export default function FriendsProfile() {
 
           <h2 className="section-title">
             Friends{" "}
-            {listFriend?.length > 0 ? (
-              <span className="highlighted">{listFriend?.length}</span>
+            {listFriendUser?.length > 0 ? (
+              <span className="highlighted">{listFriendUser?.length}</span>
             ) : null}
           </h2>
         </div>
@@ -73,9 +91,9 @@ export default function FriendsProfile() {
           </div>
         </div>
       </div> */}
-
+      {console.log(listFriendUser,"-----------------")}
       <div className="grid grid-3-3-3-3 centered">
-        {showListFriend(listFriend)}
+        {showListFriend(listFriendUser)}
       </div>
 
       {/* <div className="section-pager-bar">

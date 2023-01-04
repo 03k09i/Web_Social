@@ -45,7 +45,7 @@ export default function SettingsHeader() {
           />
           <div className="dropdown-navigation-header">
             <div className="user-status">
-              <a className="user-status-avatar" href="profile-timeline.html">
+              <NavLink className="user-status-avatar" to={`/profile/${detailUser._id}`}>
                 <div className="user-avatar small no-outline">
                   <div className="user-avatar-content">
                     <img
@@ -58,7 +58,7 @@ export default function SettingsHeader() {
                     />
                   </div>
                 </div>
-              </a>
+              </NavLink>
               <p className="user-status-title">
                 <span className="bold">{detailUser?.name}</span>
               </p>
