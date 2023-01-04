@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import ItemFriend from "./friendItem/itemFriend";
+import ItemFriend1 from "./friendItem/itemFriend1"
 import callApi from "../../../utils/callApi";
 import { getSuggestionAction, getAllUserAction } from "../../../store/actions/user.actions"
 
@@ -39,6 +40,12 @@ export default function friendList() {
     if (page === 2) {
       await setListUser(listFriendRequest);
     }
+    if (page === 3) {
+      await setListUser(listSuggestion);
+    }
+    if (page === 4) {
+      await setListUser(listAllUser);
+    }
   };
   const unfriend = async (id) => {
     const res1 = await callApi(`request/delete/${id}`, "DELETE", "", {
@@ -75,10 +82,12 @@ export default function friendList() {
           ));
       } else if (status === 3) {
         result = listUser.map((itemUser, index) => (
-            <ItemFriend key={index} status={status} itemUser={itemUser}/>
-          ));
+          <ItemFriend1 key={index} status={status} itemUser={itemUser} />
+        ));
       } else if (status === 4) {
-
+        result = listUser.map((itemUser, index) => (
+          <ItemFriend1 key={index} status={status} itemUser={itemUser} />
+        ));
       }
     }
     return result;
